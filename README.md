@@ -10,7 +10,7 @@
 파일을 직접 열면 JSON 데이터를 읽지 못하므로 프로젝트 폴더에서 HTTP 서버를 실행합니다.
 
 ```bash
-cd "/Users/hwijae/Documents/New project/workershigh-xp-portfolio-web"
+cd workershigh-xp-portfolio-web
 python3 -m http.server 4173
 ```
 
