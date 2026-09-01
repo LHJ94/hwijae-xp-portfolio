@@ -1,0 +1,5 @@
+.DS_Store
+
+# Private working datasets: generated public exports are committed instead.
+data/portfolio-dataset.json
+data/legacy-2024-2025.json

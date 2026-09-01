@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#245edb" />
+    <meta name="author" content="이휘재" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="이휘재의 워커스하이·플래그샵 마케팅 포트폴리오. 브랜드, 웹, SEO, 퍼포먼스, PR, 필드 마케팅 업무를 Windows XP 탐색기 형태로 정리했습니다."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:url" content="https://lhj94.github.io/hwijae-xp-portfolio/" />
+    <meta property="og:title" content="이휘재 마케팅 포트폴리오 — HWIJAE XP" />
+    <meta
+      property="og:description"
+      content="브랜드, 웹, SEO, 퍼포먼스, PR, 필드 마케팅 업무를 Windows XP 탐색기 형태로 정리한 포트폴리오입니다."
+    />
+    <title>이휘재 마케팅 포트폴리오 — HWIJAE XP</title>
+    <link rel="canonical" href="https://lhj94.github.io/hwijae-xp-portfolio/" />
+    <link rel="icon" href="assets/windows-logo.png" />
+    <link rel="preload" href="assets/desktop-wallpaper.jpg" as="image" />
+    <link rel="stylesheet" href="vendor/xp.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#mainContent">포트폴리오 본문으로 이동</a>
+
+    <section id="bootScreen" class="system-screen boot-screen is-active" aria-labelledby="bootTitle">
+      <div class="boot-panel">
+        <div class="boot-wordmark" aria-hidden="true">
+          <span>HWIJAE</span><b>xp</b>
+        </div>
+        <h1 id="bootTitle" class="sr-only">이휘재 마케팅 포트폴리오 시작</h1>
+        <p>Brand · Content · Growth Marketing Portfolio</p>
+        <button id="bootButton" class="boot-action" type="button">포트폴리오 부팅하기</button>
+        <div id="bootProgress" class="boot-progress" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <small>Click to start · Enter</small>
+      </div>
+    </section>
+
+    <section id="loginScreen" class="system-screen login-screen" aria-labelledby="loginTitle">
+      <div class="login-band login-band-top"></div>
+      <div class="login-layout">
+        <div class="login-intro">
+          <img src="assets/windows-logo.png" alt="" />
+          <div>
+            <p class="login-wordmark">HWIJAE<span>XP</span></p>
+            <h2 id="loginTitle">시작하려면 사용자 이름을 클릭하세요</h2>
+          </div>
+        </div>
+        <button id="loginButton" class="login-user" type="button">
+          <span class="login-avatar" aria-hidden="true">HJ</span>
+          <span>
+            <strong>이휘재</strong>
+            <small>Marketing Portfolio</small>
+          </span>
+        </button>
+      </div>
+      <div class="login-band login-band-bottom">
+        <p>2024–2026 · 워커스하이 / 플래그샵</p>
+        <p>브랜드 전환부터 실행 아카이브까지 탐색할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <main id="desktop" class="desktop" aria-label="HWIJAE XP 데스크톱">
+      <nav class="desktop-icons" aria-label="데스크톱 바로가기">
+        <button class="desktop-icon" type="button" data-open="home">
+          <img src="assets/folder.png" alt="" />
+          <span>MY PORTFOLIO</span>
+        </button>
+        <button class="desktop-icon" type="button" data-open="archive">
+          <img src="assets/document.png" alt="" />
+          <span>WORK ARCHIVE</span>
+        </button>
+        <button class="desktop-icon" type="button" data-open="dashboard">
+          <img src="assets/dashboard.svg" alt="" />
+          <span>PERFORMANCE AI</span>
+        </button>
+        <button class="desktop-icon" type="button" data-open="about">
+          <img src="assets/about.png" alt="" />
+          <span>ABOUT ME</span>
+        </button>
+        <button class="desktop-icon" type="button" data-open="contact">
+          <img src="assets/mail.png" alt="" />
+          <span>CONTACT</span>
+        </button>
+      </nav>
+
+      <section id="portfolioWindow" class="window portfolio-window is-hidden" aria-labelledby="windowTitle">
+        <div class="title-bar">
+          <div id="windowTitle" class="title-bar-text">이휘재 마케팅 포트폴리오</div>
+          <div class="title-bar-controls">
+            <button id="minimizeButton" type="button" aria-label="Minimize"></button>
+            <button id="maximizeButton" type="button" aria-label="Maximize"></button>
+            <button id="closeButton" type="button" aria-label="Close"></button>
+          </div>
+        </div>
+
+        <div class="window-body portfolio-window-body">
+          <nav class="classic-menu" aria-label="창 메뉴">
+            <button type="button">파일</button>
+            <button type="button">편집</button>
+            <button type="button">보기</button>
+            <button type="button">즐겨찾기</button>
+          </nav>
+
+          <div class="explorer-toolbar" aria-label="탐색 도구">
+            <button id="backButton" class="toolbar-button" type="button" disabled>
+              <span class="toolbar-symbol">←</span><span>뒤로</span>
+            </button>
+            <button class="toolbar-button" type="button" data-view="home">
+              <span class="toolbar-symbol">⌂</span><span>홈</span>
+            </button>
+            <button class="toolbar-button" type="button" data-view="archive">
+              <span class="toolbar-symbol">★</span><span>업무 아카이브</span>
+            </button>
+            <div class="address-bar">
+              <span>주소</span>
+              <output id="addressOutput">C:\Portfolio\대표 사례</output>
+            </div>
+          </div>
+
+          <div class="explorer-layout">
+            <aside class="explorer-sidebar" aria-label="포트폴리오 폴더">
+              <div class="sidebar-header">
+                <strong>Portfolio Tasks</strong>
+                <span>▼</span>
+              </div>
+              <div class="sidebar-group">
+                <p>주요 폴더</p>
+                <button class="sidebar-link is-selected" type="button" data-view="home">
+                  <img src="assets/folder.png" alt="" />대표 사례
+                </button>
+                <button class="sidebar-link" type="button" data-view="archive">
+                  <img src="assets/document.png" alt="" />Work Archive
+                </button>
+                <button class="sidebar-link" type="button" data-view="dashboard">
+                  <img src="assets/dashboard.svg" alt="" />AI 성과 대시보드
+                </button>
+                <button class="sidebar-link" type="button" data-view="about">
+                  <img src="assets/about.png" alt="" />역할과 역량
+                </button>
+              </div>
+              <div class="sidebar-group sidebar-summary">
+                <p>기록 범위</p>
+                <strong>2024.10—2026.08</strong>
+                <span>24개 프로젝트 클러스터</span>
+                <span>253개 레거시 업무 인덱스</span>
+              </div>
+            </aside>
+
+            <div id="mainContent" class="explorer-content" tabindex="-1" aria-live="polite">
+              <div class="content-loading">
+                <div class="loading-folder" aria-hidden="true"></div>
+                <p>포트폴리오 데이터를 불러오는 중입니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="status-bar">
+            <p id="statusText" class="status-bar-field">준비</p>
+            <p class="status-bar-field">이휘재 · Marketing Portfolio</p>
+          </div>
+        </div>
+      </section>
+
+      <aside id="startMenu" class="start-menu is-hidden" aria-label="시작 메뉴">
+        <div class="start-menu-user">
+          <span class="start-avatar">HJ</span>
+          <strong>이휘재</strong>
+        </div>
+        <div class="start-menu-grid">
+          <div class="start-menu-main">
+            <button type="button" data-open="home"><img src="assets/folder.png" alt="" /><span><strong>내 포트폴리오</strong><small>대표 사례 6건</small></span></button>
+            <button type="button" data-open="archive"><img src="assets/document.png" alt="" /><span><strong>Work Archive</strong><small>2024–2025 업무 인덱스</small></span></button>
+            <button type="button" data-open="dashboard"><img src="assets/dashboard.svg" alt="" /><span><strong>Performance AI</strong><small>가데이터 성과 분석 데모</small></span></button>
+            <button type="button" data-open="about"><img src="assets/about.png" alt="" /><span><strong>About Me</strong><small>역할과 역량</small></span></button>
+          </div>
+          <div class="start-menu-side">
+            <button type="button" data-open="contact">연락처</button>
+            <button type="button" data-view="home">대표 프로젝트</button>
+            <button type="button" data-view="archive">전체 업무 기록</button>
+          </div>
+        </div>
+        <div class="start-menu-footer">
+          <button id="shutdownButton" type="button"><span>⏻</span> 종료</button>
+        </div>
+      </aside>
+
+      <div id="welcomeToast" class="welcome-toast" role="status">
+        <button id="toastClose" type="button" aria-label="안내 닫기">×</button>
+        <strong>HWIJAE XP에 오신 것을 환영합니다.</strong>
+        <p>폴더를 클릭하면 대표 사례와 연도별 업무를 확인할 수 있습니다.</p>
+      </div>
+
+      <footer class="taskbar" aria-label="작업 표시줄">
+        <button id="startButton" class="start-button" type="button" aria-expanded="false">
+          <img src="assets/start-menu.png" alt="" />
+          <span>시작</span>
+        </button>
+        <div class="taskbar-apps">
+          <button id="portfolioTask" class="taskbar-app is-hidden" type="button">
+            <img src="assets/folder.png" alt="" />
+            <span>이휘재 마케팅 포트폴리오</span>
+          </button>
+        </div>
+        <div class="system-tray">
+          <span aria-hidden="true">●</span>
+          <time id="clock">오후 3:20</time>
+        </div>
+      </footer>
+    </main>
+
+    <section id="shutdownScreen" class="system-screen shutdown-screen" aria-labelledby="shutdownTitle">
+      <div>
+        <p class="shutdown-wordmark">HWIJAE<span>XP</span></p>
+        <h2 id="shutdownTitle">포트폴리오를 종료합니다.</h2>
+        <button id="restartButton" type="button">다시 시작</button>
+      </div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

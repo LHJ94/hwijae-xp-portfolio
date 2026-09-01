@@ -22,6 +22,7 @@ python3 -m http.server 4173
 - 공개 2024–2025 업무: `data/legacy-public-2024-2025.json`
 - 비공개 원본 데이터: `data/portfolio-dataset.json`, `data/legacy-2024-2025.json` (`.gitignore` 적용)
 - 대표 사례 선택: `app.js`의 `CASE_PROJECT_IDS`
+- AI 성과 대시보드 가데이터: `app.js`의 `DASHBOARD_DEMO`
 - 연락처: `app.js`의 `renderContact()`
 - 프로젝트 이미지·문서: `app.js`의 `renderProject()` 안 `media-slots` 영역을 실제 파일 또는 링크로 교체
 - 화면 스타일: `styles.css`
@@ -46,7 +47,10 @@ python3 scripts/build_public_data.py
 - 대표 프로젝트 6건과 프로젝트 상세
 - 2024년 41개·2025년 212개 원본 업무 인덱스
 - 연도, 상태, 검색 필터
+- 데스크톱 `Performance AI` 프로그램: 가데이터 KPI·추이·채널 비교·AI 요약·실행 제안과 7일/30일 전환
 - 창 열기·닫기·최소화·최대화, 시작 메뉴, 종료·재시작
 - 모바일 반응형과 키보드 포커스
+
+`Performance AI`는 포트폴리오용 가상 데모입니다. 실제 GA4·네이버 광고·Meta 광고 계정, API, 데이터베이스 또는 원본 대시보드의 환경 변수와 연결되지 않습니다.
 
 라이선스와 참고 자료는 `ATTRIBUTIONS.md`를 확인하세요.
