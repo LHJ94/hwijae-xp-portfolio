@@ -1,0 +1,243 @@
+{
+  "dataset_version": "1.0",
+  "purpose": "public_marketing_portfolio",
+  "language": "ko",
+  "organization": {
+    "company": "워커스하이",
+    "service_brand": "플래그샵",
+    "subject": "이휘재"
+  },
+  "taxonomy": [
+    {
+      "id": "strategy_brand",
+      "label": "전략·브랜딩",
+      "description": "연간 전략, 리브랜딩, 브랜드 자산과 외부 브랜드 정보"
+    },
+    {
+      "id": "digital_experience",
+      "label": "디지털 경험·SEO",
+      "description": "웹사이트, IA, 카피, SEO, 검색 노출"
+    },
+    {
+      "id": "performance_data",
+      "label": "퍼포먼스·데이터",
+      "description": "검색·메타 광고, 측정 체계, 대시보드"
+    },
+    {
+      "id": "content_crm",
+      "label": "콘텐츠·CRM",
+      "description": "블로그, 뉴스레터, EDM, SNS, 고객 사례"
+    },
+    {
+      "id": "pr",
+      "label": "PR·미디어",
+      "description": "보도자료, 기획 기사, 인터뷰, 미디어 관계"
+    },
+    {
+      "id": "field_marketing",
+      "label": "오프라인·필드 마케팅",
+      "description": "행사, 스폰서십, 부스, 물리적 브랜드 경험"
+    },
+    {
+      "id": "growth_enablement",
+      "label": "그로스·세일즈 지원",
+      "description": "제휴, 소개서, 콜드 메일, 리드 운영"
+    },
+    {
+      "id": "operations",
+      "label": "마케팅 운영",
+      "description": "예산·정산, 공급사·대행사 협업, 반복 운영 지원"
+    }
+  ],
+  "portfolio_projects": [
+    {
+      "id": "flagshop-rebranding",
+      "title": "플래그샵 리브랜딩 마케팅 론칭",
+      "period": "2024-12~2025-05",
+      "category_ids": [
+        "strategy_brand",
+        "digital_experience",
+        "pr"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "워커스하이의 서비스 표현을 플래그샵 중심으로 정리하고, 웹·세일즈·PR 접점에 일관된 브랜드 메시지 적용",
+      "documented_contributions": [
+        "리브랜딩 마케팅 전략·마일스톤·예산 산출",
+        "브랜드 이미지·영상 기획, 외주 RFP 및 브리피 협업",
+        "웹사이트 카피라이팅 1~3차와 SEO 태그 기획",
+        "서비스 소개서·상업용 제안서 기획 및 제작",
+        "리브랜딩 보도자료 배포"
+      ],
+      "documented_outputs": [
+        "리브랜딩 전략",
+        "브랜드 이미지·영상 가이드",
+        "웹 카피와 SEO 태그",
+        "서비스 소개서",
+        "리브랜딩 PR"
+      ],
+      "case_study_angle": "서비스 브랜드 전환을 메시지·시각 자산·웹·세일즈 문서·PR까지 확장한 통합 론칭",
+      "result_evidence": [],
+      "needed_to_publish": [
+        "리브랜딩 전후 메시지와 화면",
+        "브랜드 가이드 또는 이미지 시안",
+        "배포 기사와 소개서의 공개 가능본"
+      ]
+    },
+    {
+      "id": "website-renewal",
+      "title": "플래그샵 웹사이트 리뉴얼",
+      "period": "2025-01~2026-08",
+      "category_ids": [
+        "digital_experience",
+        "strategy_brand"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "플래그샵의 서비스 구조와 브랜드 경험을 웹사이트에서 명확하게 전달하도록 IA, 카피, 시각 자산, 협업 프로세스 개선",
+      "documented_contributions": [
+        "GNB/LNB 중심 웹 기획안 작성 및 수정",
+        "IA 기초 콘텐츠, 메인·서브 페이지 기획",
+        "Figma 작업과 메인·서브 이미지 방향 설정",
+        "리테일 미디어 이미지, 추천 조합 콘텐츠, 2차 카피 검토",
+        "주간 리뷰, 스프린트 점검, 1·2차 리더 보고, 피드백 링크·엑셀 공유"
+      ],
+      "documented_outputs": [
+        "웹 IA",
+        "페이지 카피",
+        "Figma 기획 파일",
+        "메인·서브 페이지 이미지 기획",
+        "리뉴얼 보고 및 피드백 관리 자료"
+      ],
+      "case_study_angle": "복잡한 B2B·공간 서비스의 정보를 IA와 콘텐츠 시스템으로 재구성한 웹 리뉴얼",
+      "result_evidence": [],
+      "needed_to_publish": [
+        "기존·개선 IA",
+        "주요 페이지 전후 화면",
+        "카피 결정 과정",
+        "실제 오픈 URL 또는 성과 대시보드"
+      ]
+    },
+    {
+      "id": "technical-seo-and-search-visibility",
+      "title": "테크니컬 SEO 및 검색 노출 고도화",
+      "period": "2024-10~2026-07",
+      "category_ids": [
+        "digital_experience",
+        "performance_data"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "웹사이트의 색인·메타데이터·내부 링크·검색 노출을 개선하고 검색 광고와 유기적 검색의 기반 정비",
+      "documented_contributions": [
+        "canonical·og:url·OG description·H1·국문 텍스트·SNS 버튼 개선",
+        "sitemap.xml·robots.txt 등록과 검색 엔진 색인 요청",
+        "내부 링크 구조화 및 SEO 태그 전달",
+        "구글 웹크롤링 오류·플랫폼 링크 인덱스 원인 해결",
+        "네이버 서치어드바이저 현황 분석"
+      ],
+      "documented_outputs": [
+        "테크니컬 SEO 개선안 1~5차",
+        "메타데이터·색인 설정",
+        "검색 노출 점검 자료"
+      ],
+      "case_study_angle": "콘텐츠 작성에 그치지 않고 검색 엔진이 읽는 웹 구조까지 개선한 SEO 실무",
+      "result_evidence": [
+        "Action Plan에는 플래그샵 SEO 고도화 중 구글 1~2위·네이버 2위라는 관찰 기록이 있으나, 키워드·기간·도구 원본 검증 전 대표 성과 수치로 사용하지 않는다."
+      ],
+      "needed_to_publish": [
+        "Search Console·서치어드바이저 기간별 캡처",
+        "개선 전후 색인·키워드 데이터",
+        "변경된 메타 태그와 URL 목록"
+      ]
+    },
+    {
+      "id": "search-advertising",
+      "title": "네이버·구글 검색광고 리빌드 및 운영",
+      "period": "2024-10~2026-08",
+      "category_ids": [
+        "performance_data"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "플래그샵의 검색 수요를 포착하기 위한 키워드, 소재, 계정, 예산, 대행사 운영 구조 고도화",
+      "documented_contributions": [
+        "네이버 검색광고 키워드 개선·개편",
+        "구글 ADS 계정·대행사 세팅과 검색광고 오류 해결",
+        "검색광고 리브랜딩·소재 제작·오피스 설명 문구 보완",
+        "신규 대행사 리서치·변경 및 신규 세팅",
+        "네이버 브랜드 검색광고 기획·디자인과 예산 모니터링"
+      ],
+      "documented_outputs": [
+        "검색광고 키워드 구조",
+        "광고 소재·카피",
+        "계정 및 대행사 운영안",
+        "예산 모니터링 기록"
+      ],
+      "case_study_angle": "브랜드·서비스 리브랜딩에 맞춰 검색어와 광고 카피·운영 파트너를 재정비한 퍼포먼스 운영",
+      "result_evidence": [],
+      "needed_to_publish": [
+        "키워드 구조 전후",
+        "광고 카피·소재 샘플",
+        "기간별 노출·클릭·전환 데이터"
+      ]
+    },
+    {
+      "id": "always-on-pr-program",
+      "title": "정기 PR 운영 및 보도자료 프로그램",
+      "period": "2024-10~2026-08",
+      "category_ids": [
+        "pr"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "서비스·브랜드·고객 사례·사업 이슈를 지속적으로 미디어에 전달하는 PR 운영 체계 구축",
+      "documented_contributions": [
+        "월별 PR 주제 선정과 롱리스트 운영",
+        "정기 PR 기획·초안·검토·배포 세팅",
+        "플래그존 포비베이글, 스시테크 참여, 유튜브 PPL, 월 매출 10억 관련 PR",
+        "무인 디저트 팝업, B2B몰 개편, 브랜드 자판기·고객사 도입 PR",
+        "신제품 매진·황치즈 미쯔 관련 보도자료 기획 및 작성"
+      ],
+      "documented_outputs": [
+        "보도자료",
+        "PR 캘린더·주제 리스트",
+        "배포 세팅 및 결과 검토 자료"
+      ],
+      "case_study_angle": "뉴스 가치 발굴부터 원고·배포·결과 검토까지 운영한 B2B 브랜드 PR",
+      "result_evidence": [],
+      "needed_to_publish": [
+        "공개된 기사 URL",
+        "원고 전후 또는 메시지 프레임",
+        "배포 결과 리포트"
+      ]
+    },
+    {
+      "id": "people-and-culture-expo-2026",
+      "title": "People & Culture EXPO 2026 부스·운영 프로젝트",
+      "period": "2026-07~2026-08",
+      "category_ids": [
+        "field_marketing",
+        "strategy_brand"
+      ],
+      "portfolio_tier": "P1",
+      "objective": "조직문화 박람회에서 플래그샵의 브랜드 경험과 B2B 리드 확보를 위한 현장 프로젝트 운영",
+      "documented_contributions": [
+        "참가 전략·운영안·신청서·필수 자료 기획 및 제출",
+        "부스 위치·디자인·홍보물·팜플렛·MRO 상품·예산·결제 관리",
+        "블루리본 조닝 킥오프와 세부 기획",
+        "부스 설치·현장 운영·물품 커뮤니케이션",
+        "행사 리드 공유"
+      ],
+      "documented_outputs": [
+        "참가 전략",
+        "부스 디자인·조닝",
+        "홍보물·팜플렛",
+        "현장 운영안",
+        "리드 정리"
+      ],
+      "case_study_angle": "대형 B2B 박람회를 전략·공간·제작물·운영·리드 단계로 통합 관리한 최신 대표 사례",
+      "result_evidence": [],
+      "needed_to_publish": [
+        "부스 도면·현장 사진",
+        "운영 타임라인",
+        "리드·후속 세일즈 데이터"
+      ]
+    }
+  ]
+}
