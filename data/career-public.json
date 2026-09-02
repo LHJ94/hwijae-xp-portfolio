@@ -1,0 +1,365 @@
+{
+  "dataset_version": "2.0",
+  "purpose": "public_career_and_capability_portfolio",
+  "privacy_policy": "개인 연락처, 비공개 내부 문서 위치, 고객사 식별 정보 제외",
+  "profile": {
+    "name": "이휘재",
+    "headline": "Strategy to Execution, Marketing to Business.",
+    "summary": "브랜드 전략부터 고객 획득, 콘텐츠, PR, 오프라인 접점과 B2B Lead Generation까지 연결하는 마케터입니다.",
+    "positioning": "비즈니스의 문제를 정의하고 필요한 마케팅을 직접 구축하고 실행합니다.",
+    "strengths": [
+      {
+        "title": "0→1 시스템 구축",
+        "description": "전략·메시지·채널·측정 체계를 직접 설계하고 운영 가능한 형태로 만듭니다."
+      },
+      {
+        "title": "Full-funnel 실행",
+        "description": "인지와 콘텐츠부터 문의·리드 DB·세일즈 이관까지 고객 획득 흐름을 연결합니다."
+      },
+      {
+        "title": "콘텐츠 × 데이터",
+        "description": "브랜드 표현을 SEO·광고·분석 데이터와 결합해 다음 실행으로 전환합니다."
+      }
+    ]
+  },
+  "career_timeline": [
+    {
+      "company": "HOTELIV",
+      "role": "Early-stage Marketing",
+      "period": "2019.05–2020.06",
+      "focus": "KPI · GA/GTM · Campaign"
+    },
+    {
+      "company": "우리동네커머스",
+      "role": "Local Commerce Marketing",
+      "period": "2020.11–2021.11",
+      "focus": "Naver Collaboration · Government Project · Offline"
+    },
+    {
+      "company": "Adriel",
+      "role": "Brand Consulting Manager",
+      "period": "2022.03–2022.09",
+      "focus": "Brand Consulting · Copywriting · Creative"
+    },
+    {
+      "company": "SparkPlus",
+      "role": "Content Lead · Partnership Lead",
+      "period": "2022.10–2023.11",
+      "focus": "Owned Media · SEO · Newsletter · B2B Partnership"
+    },
+    {
+      "company": "FLAGSHOP",
+      "role": "Brand · Content · Growth Marketing",
+      "period": "2024.10–2026.08 기록",
+      "focus": "Strategy · Brand · Growth · PR · Offline · Lead"
+    }
+  ],
+  "capability_folders": [
+    {
+      "id": "strategy-brand",
+      "label": "전략·브랜딩",
+      "label_en": "Strategy & Brand",
+      "description": "사업 목표를 브랜드 과제로 번역하고 메시지·예산·크리에이티브 기준을 정렬합니다.",
+      "business_value": "흩어진 실행을 하나의 브랜드 방향과 의사결정 기준으로 묶습니다.",
+      "system_files": [
+        {
+          "filename": "01_Annual-Marketing-Plan.plan",
+          "title": "연간 마케팅 운영 체계",
+          "summary": "목표·예산·채널·실행 우선순위를 한 구조로 설계",
+          "outputs": ["연간 전략", "예산안", "채널 로드맵"],
+          "case_ids": ["flagshop-rebranding"]
+        },
+        {
+          "filename": "02_FLAGSHOP-Rebranding.system",
+          "title": "플래그샵 리브랜딩",
+          "summary": "전략부터 메시지·웹·크리에이티브·PR·SEO까지 전환 체계 구축",
+          "outputs": ["브랜드 메시지", "크리에이티브 가이드", "런칭 커뮤니케이션"],
+          "case_ids": ["flagshop-rebranding", "website-renewal"]
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "Adriel",
+          "metric": "약 200개 기업",
+          "context": "브랜드 카피·크리에이티브 업무 수행"
+        },
+        {
+          "company": "HOTELIV",
+          "metric": "초기 마케팅",
+          "context": "KPI와 캠페인 운영 기반 설계"
+        }
+      ]
+    },
+    {
+      "id": "digital-seo",
+      "label": "디지털 경험·SEO",
+      "label_en": "Digital Experience & SEO",
+      "description": "웹사이트 구조와 검색 접점을 함께 설계해 고객이 서비스를 이해하고 발견하도록 만듭니다.",
+      "business_value": "브랜드 경험과 자연 유입을 단일 디지털 자산으로 축적합니다.",
+      "system_files": [
+        {
+          "filename": "01_Website-Experience.system",
+          "title": "웹사이트 경험 설계",
+          "summary": "정보 구조·카피·전환 경로를 서비스 이해 흐름으로 재구성",
+          "outputs": ["IA", "페이지 카피", "전환 경로"],
+          "case_ids": ["website-renewal"]
+        },
+        {
+          "filename": "02_Search-Visibility.stack",
+          "title": "검색 노출 기반 구축",
+          "summary": "기술 SEO·콘텐츠·검색 결과 노출을 지속 운영 가능한 구조로 연결",
+          "outputs": ["기술 SEO", "검색 콘텐츠", "노출 점검"],
+          "case_ids": ["technical-seo-and-search-visibility"]
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "SparkPlus",
+          "metric": "전환 약 15%↑",
+          "context": "온드미디어 월평균 전환 개선"
+        },
+        {
+          "company": "SparkPlus",
+          "metric": "방문자 약 30%↑",
+          "context": "채널 방문자 개선과 SEO 상위 노출"
+        }
+      ]
+    },
+    {
+      "id": "performance-data",
+      "label": "퍼포먼스·데이터",
+      "label_en": "Performance & Data",
+      "description": "유료 획득과 측정 환경을 연결해 지표를 실행 판단으로 전환합니다.",
+      "business_value": "채널 성과를 같은 기준으로 비교하고 다음 예산·소재·콘텐츠 결정을 빠르게 만듭니다.",
+      "system_files": [
+        {
+          "filename": "01_Paid-Acquisition.loop",
+          "title": "검색광고 운영 루프",
+          "summary": "키워드·소재·랜딩·전환 신호를 반복 점검하는 운영 구조",
+          "outputs": ["검색광고", "키워드 구조", "소재 개선"],
+          "case_ids": ["search-advertising"]
+        },
+        {
+          "filename": "02_Measurement-AI.dashboard",
+          "title": "성과 측정·AI 요약",
+          "summary": "GA4·GTM·광고 지표를 정규화하고 변화 신호와 실행 제안을 요약",
+          "outputs": ["GA4/GTM", "대시보드", "AI 인사이트"],
+          "case_ids": ["technical-seo-and-search-visibility"]
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "HOTELIV",
+          "metric": "기여도 100%",
+          "context": "GA·GTM 분석 환경 구축"
+        }
+      ]
+    },
+    {
+      "id": "content-crm",
+      "label": "콘텐츠·CRM",
+      "label_en": "Content & CRM",
+      "description": "블로그·SNS·뉴스레터·EDM을 고객 여정과 채널 역할에 맞게 운영합니다.",
+      "business_value": "일회성 제작물을 검색·구독·재접점이 가능한 브랜드 자산으로 바꿉니다.",
+      "system_files": [
+        {
+          "filename": "01_Owned-Media.engine",
+          "title": "온드미디어 콘텐츠 엔진",
+          "summary": "블로그·인스타그램·서비스 콘텐츠를 주제와 전환 목적에 맞춰 운영",
+          "outputs": ["블로그", "Instagram", "서비스 카피"],
+          "case_ids": ["technical-seo-and-search-visibility"]
+        },
+        {
+          "filename": "02_Newsletter-EDM.crm",
+          "title": "뉴스레터·EDM 재접점",
+          "summary": "리드와 기존 고객에게 필요한 메시지를 발송·개선하는 CRM 콘텐츠",
+          "outputs": ["Newsletter", "EDM", "발송 카피"],
+          "case_ids": []
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "SparkPlus",
+          "metric": "열람률 30%+ 회복",
+          "context": "뉴스레터 콘텐츠와 운영 개선"
+        },
+        {
+          "company": "우리동네커머스",
+          "metric": "웹 방문 약 30%↑",
+          "context": "오리지널 콘텐츠 운영 기간 기준"
+        }
+      ]
+    },
+    {
+      "id": "pr-media",
+      "label": "PR·미디어",
+      "label_en": "PR & Media",
+      "description": "브랜드가 반복해서 설명할 수 있는 의제를 만들고 보도·인터뷰·미디어 관계로 확장합니다.",
+      "business_value": "단발 보도자료를 넘어서 시장에서 기억되는 메시지와 신뢰 접점을 축적합니다.",
+      "system_files": [
+        {
+          "filename": "01_Always-on-PR.program",
+          "title": "Always-on PR 프로그램",
+          "summary": "의제·미디어 리스트·보도자료·인터뷰·기사 기록을 상시 운영",
+          "outputs": ["PR 아젠다", "보도자료", "인터뷰", "커버리지"],
+          "case_ids": ["always-on-pr-program"]
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "SparkPlus",
+          "metric": "네이버 주요 노출",
+          "context": "B2B 콘텐츠 제휴와 경제 카테고리·메인 노출"
+        }
+      ]
+    },
+    {
+      "id": "offline-field",
+      "label": "오프라인·필드 마케팅",
+      "label_en": "Offline & Field",
+      "description": "부스와 현장 경험을 방문으로 끝내지 않고 리드 수집·후속 접촉까지 설계합니다.",
+      "business_value": "오프라인 접점을 측정 가능한 B2B 리드 파이프라인으로 전환합니다.",
+      "system_files": [
+        {
+          "filename": "01_B2B-Event-Funnel.system",
+          "title": "B2B 행사 리드 퍼널",
+          "summary": "부스·이벤트·DB 정리·세일즈 전달까지 하나의 현장 운영 구조로 설계",
+          "outputs": ["부스 경험", "현장 이벤트", "Lead DB", "Sales handoff"],
+          "case_ids": ["people-and-culture-expo-2026"]
+        },
+        {
+          "filename": "02_Retail-Touchpoint.kit",
+          "title": "리테일 접점 운영 키트",
+          "summary": "현장 프로모션과 공간별 고객 접점을 일관된 실행물로 표준화",
+          "outputs": ["현장물", "프로모션", "운영 가이드"],
+          "case_ids": []
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "우리동네커머스",
+          "metric": "신규 사용자 약 30%↑",
+          "context": "전월 대비 오프라인 프로모션 성과"
+        },
+        {
+          "company": "HOTELIV",
+          "metric": "자발적 후기 약 30%↑",
+          "context": "라스트핏 캠페인 기준"
+        }
+      ]
+    },
+    {
+      "id": "growth-sales",
+      "label": "그로스·세일즈 지원",
+      "label_en": "Growth & Sales Enablement",
+      "description": "획득한 리드를 분류하고 세일즈 콘텐츠·콜드메일·파트너십으로 전환 기회를 확장합니다.",
+      "business_value": "마케팅 성과를 리드 수가 아니라 실제 후속 영업이 가능한 정보와 콘텐츠로 연결합니다.",
+      "system_files": [
+        {
+          "filename": "01_Lead-to-Sales.pipeline",
+          "title": "Lead DB → Sales Handoff",
+          "summary": "행사·콘텐츠에서 확보한 리드를 정리하고 세일즈가 활용할 수 있게 이관",
+          "outputs": ["Lead DB", "리드 분류", "Sales handoff"],
+          "case_ids": ["people-and-culture-expo-2026"]
+        },
+        {
+          "filename": "02_Sales-Content.partnership",
+          "title": "세일즈 콘텐츠·파트너십",
+          "summary": "콜드메일·제안 콘텐츠·협업 프로그램으로 B2B 접점을 확장",
+          "outputs": ["Cold mail", "Sales contents", "Partnership"],
+          "case_ids": []
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "SparkPlus",
+          "metric": "Partnership Lead",
+          "context": "B2B 콘텐츠·제휴 실행"
+        },
+        {
+          "company": "우리동네커머스",
+          "metric": "약 100건",
+          "context": "전통시장 통합 마케팅 사업 완료·정산"
+        }
+      ]
+    },
+    {
+      "id": "marketing-operations",
+      "label": "마케팅 운영",
+      "label_en": "Marketing Operations",
+      "description": "예산·협력사·보고·데이터·자동화를 표준화해 반복 가능한 마케팅 운영 기반을 만듭니다.",
+      "business_value": "개인의 기억에 의존하던 업무를 추적 가능하고 재실행 가능한 시스템으로 바꿉니다.",
+      "system_files": [
+        {
+          "filename": "01_Budget-Vendor.report",
+          "title": "예산·협력사·보고 체계",
+          "summary": "예산 집행과 외부 협업, 결과 보고를 동일한 운영 기준으로 관리",
+          "outputs": ["Budget", "Vendor", "Report"],
+          "case_ids": ["flagshop-rebranding"]
+        },
+        {
+          "filename": "02_Automation-Archive.ops",
+          "title": "자동화·업무 아카이브",
+          "summary": "반복 데이터 정리와 업무 기록을 자동화·표준화해 운영 자산으로 축적",
+          "outputs": ["Automation", "Work archive", "Data cleanup"],
+          "case_ids": []
+        }
+      ],
+      "previous_proof": [
+        {
+          "company": "우리동네커머스",
+          "metric": "연 10억원 규모",
+          "context": "공공 사업 운영·계약·정산 경험"
+        }
+      ]
+    }
+  ],
+  "previous_experience": [
+    {
+      "company": "SparkPlus",
+      "period": "2022.10–2023.11",
+      "role": "Content Lead · Partnership Lead",
+      "summary": "온드미디어·SEO·뉴스레터와 B2B 콘텐츠 제휴를 운영했습니다.",
+      "evidence": [
+        "온드미디어 월평균 전환 약 15% 상승",
+        "채널 방문자 약 30% 상승",
+        "뉴스레터 평균 열람률 30% 이상 회복",
+        "공유오피스 후기·미팅룸 추천 등 검색 키워드 상위 노출"
+      ]
+    },
+    {
+      "company": "Adriel",
+      "period": "2022.03–2022.09",
+      "role": "Brand Consulting Manager",
+      "summary": "다양한 산업의 브랜드를 빠르게 이해하고 카피와 크리에이티브로 번역했습니다.",
+      "evidence": [
+        "6개월간 약 200개 기업의 카피·크리에이티브 업무 수행",
+        "긍정·매우 긍정 평가 약 85%"
+      ]
+    },
+    {
+      "company": "우리동네커머스",
+      "period": "2020.11–2021.11",
+      "role": "Local Commerce Marketing",
+      "summary": "네이버 동네시장 장보기 협업, 정부 사업, 오프라인 마케팅을 운영했습니다.",
+      "evidence": [
+        "오리지널 콘텐츠 운영 기간 웹 방문 약 30% 상승",
+        "연 10억원 규모 전통시장 통합 마케팅 사업 운영",
+        "약 100건의 사업 완료·정산",
+        "오프라인 프로모션 신규 사용자 전월 대비 약 30% 상승"
+      ]
+    },
+    {
+      "company": "HOTELIV",
+      "period": "2019.05–2020.06",
+      "role": "Early-stage Marketing",
+      "summary": "초기 서비스의 KPI·분석 환경과 캠페인 실행 기반을 만들었습니다.",
+      "evidence": [
+        "GA·GTM 분석 환경 구축",
+        "라스트핏 캠페인 자발적 블로그 후기 약 30% 상승",
+        "네이버 검색 이미지 가시성 개선"
+      ]
+    }
+  ],
+  "source_note": "이전 경력의 수치와 표현은 사용자가 제공한 기존 Notion 포트폴리오·경력기술서를 기준으로 정리했습니다. 공개 전 증빙과 산정 기준을 재확인합니다."
+}
