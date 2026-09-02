@@ -1,12 +1,3 @@
-const CASE_PROJECT_IDS = [
-  "flagshop-rebranding",
-  "website-renewal",
-  "technical-seo-and-search-visibility",
-  "search-advertising",
-  "always-on-pr-program",
-  "people-and-culture-expo-2026",
-];
-
 const elements = {
   bootScreen: document.getElementById("bootScreen"),
   bootButton: document.getElementById("bootButton"),
@@ -37,6 +28,7 @@ const elements = {
 const state = {
   dataset: null,
   legacy: null,
+  career: null,
   booting: false,
   route: { type: "home" },
   history: [],
@@ -94,18 +86,20 @@ async function initialize() {
   window.setInterval(updateClock, 30_000);
 
   try {
-    const [datasetResponse, legacyResponse] = await Promise.all([
+    const [datasetResponse, legacyResponse, careerResponse] = await Promise.all([
       fetch("data/portfolio-public.json"),
       fetch("data/legacy-public-2024-2025.json"),
+      fetch("data/career-public.json"),
     ]);
 
-    if (!datasetResponse.ok || !legacyResponse.ok) {
+    if (!datasetResponse.ok || !legacyResponse.ok || !careerResponse.ok) {
       throw new Error("포트폴리오 데이터 파일을 찾지 못했습니다.");
     }
 
-    [state.dataset, state.legacy] = await Promise.all([
+    [state.dataset, state.legacy, state.career] = await Promise.all([
       datasetResponse.json(),
       legacyResponse.json(),
+      careerResponse.json(),
     ]);
 
     renderRoute();
@@ -273,7 +267,7 @@ function renderRoute() {
   elements.backButton.disabled = state.history.length === 0;
   updateSelectedNavigation();
 
-  if (!state.dataset || !state.legacy) return;
+  if (!state.dataset || !state.legacy || !state.career) return;
 
   switch (state.route.type) {
     case "archive":
@@ -284,9 +278,10 @@ function renderRoute() {
       renderDashboard();
       updateWindowContext("FLAGSHOP Performance AI — Demo", "C:\\Portfolio\\Performance AI", "가데이터 · AI 분석 워크플로우 데모");
       break;
+    case "career":
     case "about":
-      renderAbout();
-      updateWindowContext("About Me", "C:\\Portfolio\\About Me", "역할과 역량");
+      renderCareer();
+      updateWindowContext("Career Timeline", "C:\\Portfolio\\Career Timeline", "5개 경력 구간 · 이전 경력 증거");
       break;
     case "contact":
       renderContact();
@@ -295,10 +290,13 @@ function renderRoute() {
     case "project":
       renderProject(state.route.id);
       break;
+    case "capability":
+      renderCapability(state.route.id);
+      break;
     case "home":
     default:
       renderHome();
-      updateWindowContext("이휘재 마케팅 포트폴리오", "C:\\Portfolio\\대표 사례", "6개 대표 사례 · 24개 프로젝트 클러스터");
+      updateWindowContext("이휘재 마케팅 포트폴리오", "C:\\Portfolio\\Capability Map", "8개 역량 폴더 · 플래그샵 중심 경력 포트폴리오");
       break;
   }
 
@@ -306,52 +304,64 @@ function renderRoute() {
 }
 
 function renderHome() {
-  const projects = CASE_PROJECT_IDS.map((id) => getProject(id)).filter(Boolean);
-  const taxonomy = state.dataset.taxonomy || [];
+  const { profile, career_timeline: timeline, capability_folders: capabilities } = state.career;
 
   elements.mainContent.innerHTML = `
     <article class="content-page portfolio-home">
       <header class="portfolio-hero">
         <div>
-          <p class="page-kicker">Brand · Content · Growth Marketer</p>
-          <h1 class="page-title">복잡한 마케팅 업무를<br />브랜드 경험으로 연결합니다.</h1>
-          <p class="page-lead">
-            워커스하이에서 서비스 브랜드 플래그샵의 리브랜딩, 웹사이트, SEO·광고,
-            콘텐츠·PR, 행사 운영을 연결해 실행했습니다. 대표 사례는 의사결정과 기여 범위를 중심으로 정리했습니다.
-          </p>
+          <p class="page-kicker">Brand · Content · Growth · B2B Marketer</p>
+          <h1 class="page-title">${escapeHtml(profile.headline)}</h1>
+          <p class="page-lead">${escapeHtml(profile.summary)}<br /><strong>${escapeHtml(profile.positioning)}</strong></p>
         </div>
         <div class="metric-strip" aria-label="포트폴리오 범위">
-          <div><strong>6</strong><span>대표 사례</span></div>
-          <div><strong>24</strong><span>프로젝트 클러스터</span></div>
-          <div><strong>253</strong><span>2024–2025 업무 인덱스</span></div>
+          <div><strong>5</strong><span>경력 구간</span></div>
+          <div><strong>8</strong><span>역량 폴더</span></div>
+          <div><strong>253</strong><span>플래그샵 원본 업무</span></div>
         </div>
       </header>
 
-      <section aria-labelledby="caseHeading">
+      <section aria-labelledby="capabilityHeading">
         <div class="section-heading">
-          <h2 id="caseHeading">대표 프로젝트 폴더</h2>
-          <p>폴더를 열어 문제·판단·실행·산출물을 확인하세요.</p>
+          <h2 id="capabilityHeading">Marketing Capability Folders</h2>
+          <p>폴더를 열어 플래그샵에서 구축한 시스템과 이전 경력의 증거를 함께 확인하세요.</p>
         </div>
-        <div class="project-grid">
-          ${projects.map(projectFolderMarkup).join("")}
+        <div class="capability-folder-grid">
+          ${capabilities.map(capabilityFolderMarkup).join("")}
         </div>
       </section>
 
-      <section aria-labelledby="capabilityHeading">
+      <section aria-labelledby="careerHeading">
         <div class="section-heading">
-          <h2 id="capabilityHeading">업무를 연결하는 8개 역량</h2>
-          <p>개별 업무보다 연결된 운영 구조를 보여줍니다.</p>
+          <h2 id="careerHeading">Career Timeline</h2>
+          <button class="text-link-button" type="button" data-view="career">전체 경력과 성과 보기 →</button>
         </div>
-        <div class="competency-list">
-          ${taxonomy.map((item) => `
+        <div class="career-strip">
+          ${timeline.map((item) => `
             <article>
-              <h3>${escapeHtml(item.label)}</h3>
-              <p>${escapeHtml(item.description)}</p>
+              <span>${escapeHtml(item.period)}</span>
+              <strong>${escapeHtml(item.company)}</strong>
+              <small>${escapeHtml(item.role)}</small>
             </article>
           `).join("")}
         </div>
       </section>
     </article>
+  `;
+}
+
+function capabilityFolderMarkup(capability, index) {
+  return `
+    <button class="capability-folder" type="button" data-capability="${escapeHtml(capability.id)}">
+      <span class="capability-index">${String(index + 1).padStart(2, "0")}</span>
+      <img src="assets/folder.png" alt="" />
+      <span class="capability-folder-copy">
+        <small>${escapeHtml(capability.label_en)}</small>
+        <strong>${escapeHtml(capability.label)}.folder</strong>
+        <span>${escapeHtml(capability.description)}</span>
+      </span>
+      <span class="folder-arrow" aria-hidden="true">›</span>
+    </button>
   `;
 }
 
@@ -367,6 +377,87 @@ function projectFolderMarkup(project, index) {
       <span class="folder-arrow" aria-hidden="true">›</span>
     </button>
   `;
+}
+
+function renderCapability(capabilityId) {
+  const capability = getCapability(capabilityId);
+  if (!capability) {
+    renderDataError(new Error("역량 폴더를 찾지 못했습니다."));
+    return;
+  }
+
+  const relatedProjectIds = [...new Set(
+    capability.system_files.flatMap((file) => file.case_ids || []),
+  )];
+  const relatedProjects = relatedProjectIds.map(getProject).filter(Boolean);
+
+  elements.mainContent.innerHTML = `
+    <article class="content-page capability-detail">
+      <div class="detail-topline">
+        <button class="back-link" type="button" data-back>← 8개 역량 폴더</button>
+        <span class="detail-period">${escapeHtml(capability.label_en)} · ${capability.system_files.length} system files</span>
+      </div>
+
+      <header class="capability-hero">
+        <div>
+          <p class="page-kicker">${escapeHtml(capability.label_en)}</p>
+          <h1 class="page-title">${escapeHtml(capability.label)}</h1>
+          <p class="page-lead">${escapeHtml(capability.description)}</p>
+        </div>
+        <aside>
+          <span>BUSINESS VALUE</span>
+          <p>${escapeHtml(capability.business_value)}</p>
+        </aside>
+      </header>
+
+      <section aria-labelledby="systemFilesHeading">
+        <div class="section-heading">
+          <h2 id="systemFilesHeading">FLAGSHOP · 구축한 시스템</h2>
+          <p>개별 할 일이 아니라 반복 가능한 운영 단위로 정리했습니다.</p>
+        </div>
+        <div class="system-file-grid">
+          ${capability.system_files.map((file) => `
+            <article class="system-file-card">
+              <div class="system-file-name"><img src="assets/document.png" alt="" /><span>${escapeHtml(file.filename)}</span></div>
+              <h3>${escapeHtml(file.title)}</h3>
+              <p>${escapeHtml(file.summary)}</p>
+              <div class="output-list">${file.outputs.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+
+      <section aria-labelledby="previousProofHeading">
+        <div class="section-heading">
+          <h2 id="previousProofHeading">이전 경력에서 확인된 증거</h2>
+          <p>기존 경력기술서 기준 · 공개 전 증빙 재확인</p>
+        </div>
+        <div class="proof-grid">
+          ${capability.previous_proof.map((proof) => `
+            <article class="proof-card">
+              <span>${escapeHtml(proof.company)}</span>
+              <strong>${escapeHtml(proof.metric)}</strong>
+              <p>${escapeHtml(proof.context)}</p>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+
+      ${relatedProjects.length ? `
+        <section aria-labelledby="relatedCasesHeading">
+          <div class="section-heading">
+            <h2 id="relatedCasesHeading">연결된 대표 사례 파일</h2>
+            <p>세부 기여와 산출물은 사례 파일에서 확인합니다.</p>
+          </div>
+          <div class="project-grid related-project-grid">
+            ${relatedProjects.map(projectFolderMarkup).join("")}
+          </div>
+        </section>
+      ` : ""}
+    </article>
+  `;
+
+  updateWindowContext(capability.label, `C:\\Portfolio\\Capability Map\\${capability.id}.folder`, `${capability.system_files.length}개 시스템 파일 · ${capability.previous_proof.length}개 이전 경력 증거`);
 }
 
 function renderProject(projectId) {
@@ -387,7 +478,7 @@ function renderProject(projectId) {
   elements.mainContent.innerHTML = `
     <article class="content-page project-detail">
       <div class="detail-topline">
-        <button class="back-link" type="button" data-back>← 대표 프로젝트</button>
+        <button class="back-link" type="button" data-back>← 이전 화면</button>
         <span class="detail-period">${escapeHtml(project.period)} · ${escapeHtml(project.portfolio_tier)}</span>
       </div>
 
@@ -625,33 +716,57 @@ function archiveRowMarkup(record) {
   `;
 }
 
-function renderAbout() {
-  const taxonomy = state.dataset.taxonomy || [];
-
+function renderCareer() {
+  const { profile, career_timeline: timeline, previous_experience: experiences, source_note: sourceNote } = state.career;
   elements.mainContent.innerHTML = `
-    <article class="content-page">
-      <p class="page-kicker">About Me</p>
-      <h1 class="page-title">이휘재<br />마케팅 포트폴리오</h1>
-      <div class="about-grid">
-        <aside class="about-card">
-          <div class="about-avatar" aria-hidden="true">HJ</div>
-          <h2>Brand · Content · Growth</h2>
-          <p>워커스하이 Business<br />플래그샵 마케팅</p>
-          <p>업무 기록 범위<br /><strong>2024.10—2026.08</strong></p>
-        </aside>
-        <div class="about-copy">
-          <h2>역할 요약</h2>
-          <p>
-            브랜드 전략과 카피를 세우고, 웹·SEO·광고·PR·현장 실행까지 연결하는 마케터입니다.
-            포트폴리오는 결과 수치를 과장하지 않고 확인된 기여, 산출물, 원본 업무 기록을 중심으로 구성했습니다.
-          </p>
-          <div class="competency-list">
-            ${taxonomy.map((item) => `
-              <article><h3>${escapeHtml(item.label)}</h3><p>${escapeHtml(item.description)}</p></article>
-            `).join("")}
-          </div>
+    <article class="content-page career-page">
+      <header class="profile-hero">
+        <div class="about-avatar" aria-hidden="true">HJ</div>
+        <div>
+          <p class="page-kicker">About Hwijae Lee</p>
+          <h1 class="page-title">${escapeHtml(profile.headline)}</h1>
+          <p class="page-lead">${escapeHtml(profile.summary)}<br /><strong>${escapeHtml(profile.positioning)}</strong></p>
         </div>
-      </div>
+      </header>
+
+      <section aria-labelledby="strengthHeading">
+        <div class="section-heading"><h2 id="strengthHeading">한눈에 보는 강점</h2><p>플래그샵에서 현재진행형으로 확장한 능력</p></div>
+        <div class="strength-grid">
+          ${profile.strengths.map((strength, index) => `
+            <article><span>0${index + 1}</span><h3>${escapeHtml(strength.title)}</h3><p>${escapeHtml(strength.description)}</p></article>
+          `).join("")}
+        </div>
+      </section>
+
+      <section aria-labelledby="timelineHeading">
+        <div class="section-heading"><h2 id="timelineHeading">Career Timeline</h2><p>2019–2026</p></div>
+        <div class="career-timeline">
+          ${timeline.map((item, index) => `
+            <article class="career-entry ${index === timeline.length - 1 ? "is-current" : ""}">
+              <div><span>${String(index + 1).padStart(2, "0")}</span><i aria-hidden="true"></i></div>
+              <time>${escapeHtml(item.period)}</time>
+              <h3>${escapeHtml(item.company)}</h3>
+              <strong>${escapeHtml(item.role)}</strong>
+              <p>${escapeHtml(item.focus)}</p>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+
+      <section aria-labelledby="experienceHeading">
+        <div class="section-heading"><h2 id="experienceHeading">Previous Experience</h2><p>플래그샵 이전에 축적한 실행 증거</p></div>
+        <div class="career-company-grid">
+          ${experiences.map((experience) => `
+            <article class="career-company-card">
+              <div><span>${escapeHtml(experience.period)}</span><strong>${escapeHtml(experience.company)}</strong></div>
+              <h3>${escapeHtml(experience.role)}</h3>
+              <p>${escapeHtml(experience.summary)}</p>
+              <ul>${listMarkup(experience.evidence)}</ul>
+            </article>
+          `).join("")}
+        </div>
+        <p class="source-note">※ ${escapeHtml(sourceNote)}</p>
+      </section>
     </article>
   `;
 }
@@ -686,6 +801,12 @@ function handleContentClick(event) {
   const projectButton = event.target.closest("[data-project]");
   if (projectButton) {
     navigate({ type: "project", id: projectButton.dataset.project });
+    return;
+  }
+
+  const capabilityButton = event.target.closest("[data-capability]");
+  if (capabilityButton) {
+    navigate({ type: "capability", id: capabilityButton.dataset.capability });
     return;
   }
 
@@ -730,7 +851,9 @@ function updateWindowContext(title, address, status) {
 }
 
 function updateSelectedNavigation() {
-  const selectedView = state.route.type === "project" ? "home" : state.route.type;
+  const selectedView = ["project", "capability"].includes(state.route.type)
+    ? "home"
+    : state.route.type === "about" ? "career" : state.route.type;
   document.querySelectorAll(".sidebar-link[data-view]").forEach((button) => {
     button.classList.toggle("is-selected", button.dataset.view === selectedView);
   });
@@ -738,6 +861,10 @@ function updateSelectedNavigation() {
 
 function getProject(projectId) {
   return state.dataset.portfolio_projects.find((project) => project.id === projectId);
+}
+
+function getCapability(capabilityId) {
+  return state.career.capability_folders.find((capability) => capability.id === capabilityId);
 }
 
 function categoryLabel(categoryId) {
