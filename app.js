@@ -1,3 +1,5 @@
+import { createPrograms, APPS } from './programs.js';
+
 const elements = {
   bootScreen: document.getElementById("bootScreen"),
   bootButton: document.getElementById("bootButton"),
@@ -29,17 +31,30 @@ const state = {
   dataset: null,
   legacy: null,
   career: null,
+  workArchive: null,
   booting: false,
   route: { type: "home" },
   history: [],
   archive: {
-    year: "2025",
+    experienceId: "flagshop-rebranding",
+    year: "all",
     status: "all",
     query: "",
-    limit: 40,
+    limit: 8,
   },
   dashboardRange: "30",
+  navDepth: 0,
+  evidence: {},
 };
+
+const programs = createPrograms({ elements, state, navigate, updateWindowContext });
+let bootTimer;
+
+function routeFromHash() {
+  const [type, id] = location.hash.slice(1).split('/');
+  const allowed = [...APPS.map((app) => app[0]), 'career', 'contact', 'project', 'capability'];
+  return allowed.includes(type) ? { type, ...(id ? { id } : {}) } : { type: 'home' };
+}
 
 const DASHBOARD_DEMO = {
   "7": {
@@ -82,25 +97,40 @@ initialize();
 
 async function initialize() {
   bindEvents();
+  programs.mount();
+  state.route = routeFromHash();
+  history.replaceState({ portfolioDepth: 0 }, '', `#${state.route.type}${state.route.id ? '/' + state.route.id : ''}`);
+  window.addEventListener('popstate', (event) => {
+    state.navDepth = event.state?.portfolioDepth || 0;
+    state.route = routeFromHash();
+    elements.portfolioWindow.classList.remove('is-hidden', 'is-minimized');
+    elements.portfolioWindow.inert = false;
+    elements.portfolioTask.classList.remove('is-hidden');
+    renderRoute();
+  });
+  let visited = false;
+  try { visited = sessionStorage.getItem('hwijae-visited') === 'yes'; } catch { /* Private browsing can disable storage. */ }
+  if (visited) finishBoot(); else startBootSequence();
   updateClock();
   window.setInterval(updateClock, 30_000);
 
   try {
-    const [datasetResponse, legacyResponse, careerResponse] = await Promise.all([
+    const [datasetResponse, careerResponse, evidence] = await Promise.all([
       fetch("data/portfolio-public.json"),
-      fetch("data/legacy-public-2024-2025.json"),
       fetch("data/career-public.json"),
+      fetch("data/evidence-public.json").then((r) => { if (!r.ok) throw new Error('Evidence unavailable'); return r.json(); }).catch(() => ({ loadError: true })),
     ]);
 
-    if (!datasetResponse.ok || !legacyResponse.ok || !careerResponse.ok) {
+    if (!datasetResponse.ok || !careerResponse.ok) {
       throw new Error("포트폴리오 데이터 파일을 찾지 못했습니다.");
     }
 
-    [state.dataset, state.legacy, state.career] = await Promise.all([
+    [state.dataset, state.career] = await Promise.all([
       datasetResponse.json(),
-      legacyResponse.json(),
       careerResponse.json(),
     ]);
+    state.evidence = evidence;
+    programs.updateProfile();
 
     renderRoute();
   } catch (error) {
@@ -109,7 +139,8 @@ async function initialize() {
 }
 
 function bindEvents() {
-  elements.bootButton.addEventListener("click", startBootSequence);
+  elements.bootButton.addEventListener("click", finishBoot);
+  document.querySelector('.skip-link').addEventListener('click', (event) => { event.preventDefault(); finishBoot(); login(); elements.mainContent.focus(); });
   elements.loginButton.addEventListener("click", login);
   elements.backButton.addEventListener("click", navigateBack);
   elements.minimizeButton.addEventListener("click", minimizeWindow);
@@ -129,6 +160,7 @@ function bindEvents() {
 }
 
 function handleGlobalClick(event) {
+  if (event.target.closest('[data-retry]')) { location.reload(); return; }
   const openButton = event.target.closest("[data-open]");
   if (openButton) {
     openWindow(openButton.dataset.open);
@@ -146,10 +178,12 @@ function handleGlobalClick(event) {
 }
 
 function handleGlobalKeydown(event) {
+  if (event.key === 'Escape') { closeStartMenu(); return; }
+  if (event.target.closest('button, input, select, a')) return;
   if (event.key !== "Enter") return;
 
   if (elements.bootScreen.classList.contains("is-active")) {
-    startBootSequence();
+    finishBoot();
   } else if (elements.loginScreen.classList.contains("is-active")) {
     login();
   }
@@ -159,20 +193,30 @@ function startBootSequence() {
   if (state.booting) return;
 
   state.booting = true;
-  elements.bootButton.classList.add("is-loading");
   elements.bootProgress.classList.add("is-running");
   elements.bootProgress.setAttribute("aria-hidden", "false");
 
-  window.setTimeout(() => {
-    switchSystemScreen(elements.bootScreen, elements.loginScreen);
-    state.booting = false;
-  }, 1_150);
+  bootTimer = window.setTimeout(finishBoot, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 2_600);
+}
+
+function finishBoot() {
+  window.clearTimeout(bootTimer);
+  elements.bootScreen.classList.remove('is-active');
+  elements.loginScreen.classList.add('is-active');
+  state.booting = false;
 }
 
 function login() {
+  if (elements.desktop.classList.contains('is-active')) return;
+  try { sessionStorage.setItem('hwijae-visited', 'yes'); } catch { /* Storage is optional. */ }
   elements.loginScreen.classList.remove("is-active");
   elements.desktop.classList.add("is-active");
-  window.setTimeout(() => openWindow("home"), 480);
+  programs.sound('welcome');
+  elements.portfolioWindow.classList.remove('is-hidden', 'is-minimized');
+  elements.portfolioWindow.inert = false;
+  elements.portfolioTask.classList.remove('is-hidden');
+  renderRoute();
+  elements.mainContent.focus();
 }
 
 function switchSystemScreen(from, to) {
@@ -181,11 +225,14 @@ function switchSystemScreen(from, to) {
 }
 
 function openWindow(routeType = "home") {
+  elements.portfolioWindow.inert = false;
   elements.portfolioWindow.classList.remove("is-hidden", "is-minimized");
   elements.portfolioTask.classList.remove("is-hidden");
   elements.portfolioTask.classList.add("is-active");
   closeStartMenu();
   navigate({ type: routeType });
+  programs.sound();
+  elements.mainContent.focus({ preventScroll: true });
 }
 
 function closeWindow() {
@@ -195,8 +242,10 @@ function closeWindow() {
 }
 
 function minimizeWindow() {
+  elements.portfolioWindow.inert = true;
   elements.portfolioWindow.classList.add("is-minimized");
   elements.portfolioTask.classList.remove("is-active");
+  elements.portfolioTask.focus();
 }
 
 function toggleTaskWindow() {
@@ -206,6 +255,7 @@ function toggleTaskWindow() {
   }
 
   const isMinimized = elements.portfolioWindow.classList.toggle("is-minimized");
+  elements.portfolioWindow.inert = isMinimized;
   elements.portfolioTask.classList.toggle("is-active", !isMinimized);
 }
 
@@ -241,15 +291,21 @@ function restart() {
   elements.bootProgress.classList.remove("is-running");
   state.history = [];
   state.route = { type: "home" };
-  window.setTimeout(() => elements.bootScreen.classList.add("is-active"), 260);
+  state.navDepth = 0;
+  history.replaceState({ portfolioDepth: 0 }, '', '#home');
+  elements.bootScreen.classList.add('is-active');
+  startBootSequence();
 }
 
 function navigate(route, options = {}) {
+  if (route.type === 'archive') route = { type: 'home' };
   const { replace = false } = options;
   const isSameRoute = route.type === state.route.type && route.id === state.route.id;
 
   if (!replace && !isSameRoute) {
     state.history.push({ ...state.route });
+    state.navDepth += 1;
+    history.pushState({ portfolioDepth: state.navDepth }, '', `#${route.type}${route.id ? '/' + route.id : ''}`);
   }
 
   state.route = { ...route };
@@ -257,22 +313,21 @@ function navigate(route, options = {}) {
 }
 
 function navigateBack() {
-  const previous = state.history.pop();
-  if (!previous) return;
-  state.route = previous;
-  renderRoute();
+  if (state.navDepth > 0) history.back();
 }
 
 function renderRoute() {
-  elements.backButton.disabled = state.history.length === 0;
+  elements.backButton.disabled = state.navDepth === 0;
   updateSelectedNavigation();
 
-  if (!state.dataset || !state.legacy || !state.career) return;
+  if (!state.dataset || !state.career) return;
+  if (programs.render(state.route.type)) { elements.mainContent.scrollTop = 0; return; }
+  elements.mainContent.className = 'explorer-content';
 
   switch (state.route.type) {
     case "archive":
       renderArchive();
-      updateWindowContext("Work Archive 2024–2025", "C:\\Portfolio\\Work Archive", "253개 업무 인덱스");
+      updateWindowContext("Experience Archive", "C:\\Portfolio\\Experience Archive", "업무 경험 · 253개 원본 기록 연결");
       break;
     case "dashboard":
       renderDashboard();
@@ -479,7 +534,7 @@ function renderProject(projectId) {
     <article class="content-page project-detail">
       <div class="detail-topline">
         <button class="back-link" type="button" data-back>← 이전 화면</button>
-        <span class="detail-period">${escapeHtml(project.period)} · ${escapeHtml(project.portfolio_tier)}</span>
+        <span class="detail-period">${escapeHtml(project.period)} · FLAGSHOP</span>
       </div>
 
       <header>
@@ -531,60 +586,146 @@ function renderProject(projectId) {
 }
 
 function renderArchive() {
-  const yearData = state.legacy.yearly_work_index[state.archive.year];
-  const records = yearData?.records || [];
-  const filtered = filterArchiveRecords(records);
+  const experiences = state.workArchive.experiences || [];
+  const experience = experiences.find((item) => item.id === state.archive.experienceId) || experiences[0];
+  if (!experience) {
+    renderDataError(new Error("업무 경험 데이터를 찾지 못했습니다."));
+    return;
+  }
+
+  const allRecords = getAllArchiveRecords();
+  const experienceRecords = allRecords.filter((record) => archiveRecordMatchesExperience(record, experience));
+  const filtered = filterArchiveRecords(experienceRecords);
   const visible = filtered.slice(0, state.archive.limit);
+  const primaryAction = experience.project_id
+    ? `<button class="archive-primary-action" type="button" data-project="${escapeHtml(experience.project_id)}">대표 사례 상세 보기 →</button>`
+    : `<button class="archive-primary-action" type="button" data-capability="${escapeHtml(experience.capability_id)}">역량 폴더에서 더 보기 →</button>`;
 
   elements.mainContent.innerHTML = `
     <article class="content-page archive-page">
       <header class="archive-header">
         <div>
-          <p class="page-kicker">Original Work Index</p>
-          <h1 class="page-title">2024–2025 Work Archive</h1>
+          <p class="page-kicker">Experience-led Work Archive</p>
+          <h1 class="page-title">업무가 아니라, 경험의 구조를 보여줍니다.</h1>
           <p class="page-lead">
-            24개 프로젝트로 압축되기 전의 고유 업무 제목을 원본 상태와 시트 위치까지 보존했습니다.
-            공개 화면에서는 개인정보와 내부 시트 위치를 제외했으며, 업무 수를 성과 수치로 해석하지 않습니다.
+            2024–2025년의 ${allRecords.length}개 실행 기록에서 대표 업무 경험에 연결되는 업무를 선별했습니다.
+            각 경험을 선택하면 왜 시작했고, 무엇을 목표로, 어떤 실행을 거쳐 결과를 만들었는지 한 화면에서 확인할 수 있습니다.
           </p>
         </div>
-        <div class="archive-counts" aria-label="연도별 인덱스 수">
-          <div><strong>41</strong><span>2024 완료·진행</span></div>
-          <div><strong>212</strong><span>2025 완료·진행</span></div>
+        <div class="archive-counts" aria-label="아카이브 구성">
+          <div><strong>${experiences.length}</strong><span>대표 업무 경험</span></div>
+          <div><strong>${allRecords.length}</strong><span>분석 대상 실행 기록</span></div>
         </div>
       </header>
 
-      <div class="archive-controls">
-        <div class="year-switch" aria-label="연도 선택">
-          ${["2024", "2025"].map((year) => `
-            <button type="button" data-archive-year="${year}" class="${state.archive.year === year ? "is-active" : ""}">${year}</button>
-          `).join("")}
-        </div>
-        <label class="field-label">
-          업무 검색
-          <input id="archiveSearch" type="search" value="${escapeHtml(state.archive.query)}" placeholder="제목·분류·원본 위치 검색" />
-        </label>
-        <label class="field-label">
-          원본 상태
-          <select id="archiveStatus">
-            <option value="all" ${state.archive.status === "all" ? "selected" : ""}>전체</option>
-            <option value="complete" ${state.archive.status === "complete" ? "selected" : ""}>완료 포함</option>
-            <option value="active" ${state.archive.status === "active" ? "selected" : ""}>진행 포함</option>
-          </select>
-        </label>
-      </div>
+      <nav class="archive-experience-nav" aria-label="대표 업무 경험 선택">
+        ${experiences.map((item) => {
+          const linkedCount = allRecords.filter((record) => archiveRecordMatchesExperience(record, item)).length;
+          const selected = item.id === experience.id;
+          return `
+            <button class="archive-experience-tab ${selected ? "is-active" : ""}" type="button" data-archive-experience="${escapeHtml(item.id)}" aria-pressed="${selected}">
+              <span>${escapeHtml(item.index)}</span>
+              <small>${escapeHtml(item.label)}</small>
+              <strong>${escapeHtml(item.title)}</strong>
+              <em>${linkedCount}개 실행 연결</em>
+            </button>
+          `;
+        }).join("")}
+      </nav>
 
-      <div class="archive-summary">
-        <span>${state.archive.year}년 ${filtered.length}개 검색 결과</span>
-        <span>원본 고유 제목 ${yearData.unique_titles}개 중 ${yearData.indexed_titles}개 · 공개용 정제본</span>
-      </div>
-
-      <div class="archive-list" aria-label="업무 인덱스">
-        <div class="archive-row archive-table-head" aria-hidden="true">
-          <span>연도</span><span>업무 제목</span><span>상태·분류</span>
+      <section class="archive-experience" aria-labelledby="archiveExperienceTitle">
+        <div class="archive-experience-heading">
+          <div>
+            <p class="page-kicker">${escapeHtml(experience.index)} · ${escapeHtml(experience.label)}</p>
+            <h2 id="archiveExperienceTitle">${escapeHtml(experience.title)}</h2>
+            <p>${escapeHtml(experience.summary)}</p>
+          </div>
+          <div class="archive-experience-meta">
+            <span>${escapeHtml(experience.period)}</span>
+            <strong>${experienceRecords.length}개 연결 업무</strong>
+          </div>
         </div>
-        ${visible.length ? visible.map(archiveRowMarkup).join("") : `<p class="empty-state">검색 조건과 일치하는 업무가 없습니다.</p>`}
-      </div>
-      ${filtered.length > visible.length ? `<button class="archive-more" type="button" data-show-more>업무 더 보기 (${filtered.length - visible.length})</button>` : ""}
+
+        <div class="archive-why-grid">
+          <article>
+            <span>CONTEXT · 왜 필요했나</span>
+            <p>${escapeHtml(experience.context)}</p>
+          </article>
+          <article>
+            <span>INTENT · 어떤 의도였나</span>
+            <p>${escapeHtml(experience.intent)}</p>
+          </article>
+          <article class="is-goal">
+            <span>GOAL · 무엇을 목표했나</span>
+            <p>${escapeHtml(experience.goal)}</p>
+          </article>
+        </div>
+
+        <section class="archive-process" aria-labelledby="archiveProcessHeading">
+          <div class="archive-section-title">
+            <span>HOW IT WAS DONE</span>
+            <h3 id="archiveProcessHeading">성과를 만든 실행 흐름</h3>
+          </div>
+          <div class="archive-process-grid">
+            ${experience.process.map((item) => `
+              <article>
+                <span>${escapeHtml(item.step)}</span>
+                <div><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.description)}</p></div>
+              </article>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="archive-result" aria-labelledby="archiveResultHeading">
+          <div>
+            <span>DELIVERED OUTCOME</span>
+            <h3 id="archiveResultHeading">달성한 결과</h3>
+          </div>
+          <ul>${experience.outcomes.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+          <aside><strong>증빙 상태</strong><p>${escapeHtml(experience.evidence_note)}</p></aside>
+          ${primaryAction}
+        </section>
+      </section>
+
+      <section class="archive-linked-work" aria-labelledby="linkedWorkHeading">
+        <div class="section-heading">
+          <div>
+            <h2 id="linkedWorkHeading">이 경험을 만든 실제 업무</h2>
+            <p>결과 뒤에 있는 실행 밀도를 확인하는 보조 기록입니다.</p>
+          </div>
+          <span class="archive-record-note">업무 수 자체는 성과 수치로 해석하지 않습니다.</span>
+        </div>
+
+        <div class="archive-controls">
+          <div class="year-switch" aria-label="연도 선택">
+            ${["all", "2024", "2025"].map((year) => `
+              <button type="button" data-archive-year="${year}" class="${state.archive.year === year ? "is-active" : ""}">${year === "all" ? "전체" : year}</button>
+            `).join("")}
+          </div>
+          <label class="field-label">
+            연결 업무 검색
+            <input id="archiveSearch" type="search" value="${escapeHtml(state.archive.query)}" placeholder="업무 제목 또는 분류 검색" />
+          </label>
+          <label class="field-label">
+            원본 상태
+            <select id="archiveStatus">
+              <option value="all" ${state.archive.status === "all" ? "selected" : ""}>전체</option>
+              <option value="complete" ${state.archive.status === "complete" ? "selected" : ""}>완료 포함</option>
+              <option value="active" ${state.archive.status === "active" ? "selected" : ""}>진행 포함</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="archive-summary">
+          <span>${filtered.length}개 연결 업무</span>
+          <span>2024–2025 공개용 정제본 · 개인정보와 내부 시트 위치 제외</span>
+        </div>
+
+        <div class="archive-work-grid" aria-label="선택한 경험에 연결된 업무">
+          ${visible.length ? visible.map(archiveWorkItemMarkup).join("") : `<p class="empty-state">검색 조건과 일치하는 연결 업무가 없습니다.</p>`}
+        </div>
+        ${filtered.length > visible.length ? `<button class="archive-more" type="button" data-show-more>연결 업무 더 보기 (${filtered.length - visible.length})</button>` : ""}
+      </section>
     </article>
   `;
 }
@@ -683,11 +824,12 @@ function filterArchiveRecords(records) {
 
   return records.filter((record) => {
     const statuses = record.statuses || [];
+    const yearMatches = state.archive.year === "all" || record.year === state.archive.year;
     const statusMatches = state.archive.status === "all"
       || (state.archive.status === "complete" && statuses.some((status) => status === "완료"))
       || (state.archive.status === "active" && statuses.some((status) => status.includes("진행")));
 
-    if (!statusMatches) return false;
+    if (!yearMatches || !statusMatches) return false;
     if (!query) return true;
 
     const haystack = [record.title, ...(record.categories || []), ...(record.statuses || [])]
@@ -697,23 +839,46 @@ function filterArchiveRecords(records) {
   });
 }
 
-function archiveRowMarkup(record) {
+function archiveWorkItemMarkup(record) {
   const categories = (record.categories || []).filter((item) => !/^\d+$/.test(String(item)));
 
   return `
-    <div class="archive-row">
-      <span class="archive-year">${escapeHtml(state.archive.year)}</span>
-      <span class="archive-title">${escapeHtml(record.title)}</span>
-      <span>
+    <article class="archive-work-item">
+      <div>
+        <span class="archive-year">${escapeHtml(record.year)}</span>
         <span class="status-badges">
           ${(record.statuses || []).map((status) => `
             <span class="status-badge ${status === "완료" ? "is-complete" : status.includes("진행") ? "is-active" : ""}">${escapeHtml(status)}</span>
           `).join("")}
         </span>
-        <span class="archive-categories">${escapeHtml(categories.join(" · ") || "분류 없음")}</span>
-      </span>
-    </div>
+      </div>
+      <h4>${escapeHtml(record.title)}</h4>
+      <p>${escapeHtml(categories.join(" · ") || "연결 분류 없음")}</p>
+    </article>
   `;
+}
+
+function getAllArchiveRecords() {
+  return Object.entries(state.legacy.yearly_work_index).flatMap(([year, yearData]) =>
+    (yearData.records || []).map((record) => ({ ...record, year })),
+  );
+}
+
+function archiveRecordMatchesExperience(record, experience) {
+  const rules = experience.linked_work_rules || {};
+  const title = String(record.title || "").toLocaleLowerCase("ko");
+  const categories = (record.categories || []).map((item) => String(item).toLocaleLowerCase("ko"));
+  const excluded = (rules.exclude_keywords || []).some((keyword) =>
+    title.includes(String(keyword).toLocaleLowerCase("ko")),
+  );
+  if (excluded) return false;
+  const keywordMatch = (rules.keywords || []).some((keyword) =>
+    title.includes(String(keyword).toLocaleLowerCase("ko")),
+  );
+  const categoryMatch = (rules.categories || []).some((category) =>
+    categories.includes(String(category).toLocaleLowerCase("ko")),
+  );
+  return keywordMatch || categoryMatch;
 }
 
 function renderCareer() {
@@ -798,6 +963,17 @@ function handleContentClick(event) {
     return;
   }
 
+  const archiveExperienceButton = event.target.closest("[data-archive-experience]");
+  if (archiveExperienceButton) {
+    state.archive.experienceId = archiveExperienceButton.dataset.archiveExperience;
+    state.archive.year = "all";
+    state.archive.status = "all";
+    state.archive.query = "";
+    state.archive.limit = 8;
+    renderArchive();
+    return;
+  }
+
   const projectButton = event.target.closest("[data-project]");
   if (projectButton) {
     navigate({ type: "project", id: projectButton.dataset.project });
@@ -818,13 +994,13 @@ function handleContentClick(event) {
   const yearButton = event.target.closest("[data-archive-year]");
   if (yearButton) {
     state.archive.year = yearButton.dataset.archiveYear;
-    state.archive.limit = 40;
+    state.archive.limit = 8;
     renderArchive();
     return;
   }
 
   if (event.target.closest("[data-show-more]")) {
-    state.archive.limit += 40;
+    state.archive.limit += 8;
     renderArchive();
   }
 }
@@ -832,7 +1008,7 @@ function handleContentClick(event) {
 function handleArchiveInput(event) {
   if (event.target.id !== "archiveSearch") return;
   state.archive.query = event.target.value;
-  state.archive.limit = 40;
+  state.archive.limit = 8;
   window.clearTimeout(handleArchiveInput.timer);
   handleArchiveInput.timer = window.setTimeout(renderArchive, 140);
 }
@@ -840,12 +1016,13 @@ function handleArchiveInput(event) {
 function handleArchiveChange(event) {
   if (event.target.id !== "archiveStatus") return;
   state.archive.status = event.target.value;
-  state.archive.limit = 40;
+  state.archive.limit = 8;
   renderArchive();
 }
 
 function updateWindowContext(title, address, status) {
   elements.windowTitle.textContent = title;
+  elements.portfolioTask.querySelector('span').textContent = title;
   elements.addressOutput.textContent = address;
   elements.statusText.textContent = status;
 }
@@ -887,8 +1064,8 @@ function renderDataError(error) {
   elements.mainContent.innerHTML = `
     <div class="empty-state">
       <strong>포트폴리오 데이터를 불러오지 못했습니다.</strong>
-      <p>${escapeHtml(error.message)}</p>
-      <p>로컬에서는 HTTP 서버로 열어주세요: <code>python3 -m http.server 4173</code></p>
+      <p>연결 상태를 확인한 뒤 다시 불러와 주세요.</p>
+      <button type="button" data-retry>다시 불러오기</button>
     </div>
   `;
   elements.statusText.textContent = "데이터 로딩 오류";

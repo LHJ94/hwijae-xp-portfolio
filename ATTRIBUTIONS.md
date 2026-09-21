@@ -1,5 +1,11 @@
 # Attributions
 
+## 이번 버전의 자체 제작 리소스
+
+- `assets/program-icons.svg`: XP 시각 언어를 참고해 직접 작성한 SVG 아이콘. 타 사이트 아이콘 파일을 추출하지 않았습니다.
+- `programs.js`의 효과음: Web Audio oscillator로 생성하는 짧은 자체 톤. 기본 음소거이며 사용자가 켰을 때만 재생합니다.
+- 2026-09-21 확인: [MitchIvin XP 공개 저장소](https://github.com/mitchivin/mitchIvin-xp)는 제품 소개용 저장소이며 애플리케이션 소스를 공개하지 않는다고 명시합니다. README의 Windows XP 사운드 표기는 Microsoft 소유 크레딧이며 재배포 허가로 취급하지 않았습니다. 원본 효과음은 복제하지 않았습니다.
+
 ## 포함된 오픈소스
 
 - [XP.css](https://github.com/botoxparty/XP.css) 0.2.6 — MIT License. `vendor/xp.css`로 포함했습니다.

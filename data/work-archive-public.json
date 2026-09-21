@@ -1,0 +1,260 @@
+{
+  "dataset_version": "1.0",
+  "purpose": "public_experience_led_work_archive",
+  "privacy_policy": "공개용 업무 제목만 연결하며 내부 위치와 개인 식별 정보는 제외",
+  "experiences": [
+    {
+      "id": "flagshop-rebranding",
+      "index": "01",
+      "label": "Rebranding System",
+      "title": "플래그샵 리브랜딩 론칭",
+      "period": "2024.12–2025.05",
+      "summary": "브랜드 전략을 웹·세일즈·PR 접점까지 작동하는 실행 기준으로 확장했습니다.",
+      "context": "회사명과 서비스 표현이 여러 자료에 혼재해 고객 접점마다 브랜드 설명의 기준이 달랐습니다.",
+      "intent": "플래그샵을 중심으로 서비스의 정체성과 고객이 이해해야 할 핵심 메시지를 다시 정렬했습니다.",
+      "goal": "전략 문서에서 끝나지 않고 메시지·시각 자산·웹·세일즈 문서·PR이 같은 방향으로 작동하는 론칭 체계를 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "방향 정렬", "description": "전략·마일스톤·예산과 서비스 메시지의 기준을 먼저 정했습니다." },
+        { "step": "02", "title": "접점 제작", "description": "이미지·영상 RFP, 웹 카피, SEO 태그, 소개서와 제안서를 함께 설계했습니다." },
+        { "step": "03", "title": "론칭 확장", "description": "PR 배포와 웹 적용, 전후 데이터 점검까지 연결해 브랜드 전환을 운영했습니다." }
+      ],
+      "outcomes": [
+        "서비스 표현을 플래그샵 중심으로 재정의",
+        "웹·세일즈·PR이 공유하는 메시지와 자산 기준 구축",
+        "론칭 이후 전후 데이터를 확인할 측정 항목 마련"
+      ],
+      "evidence_note": "리브랜딩 전후 화면·소개서·기사·웹 데이터의 공개 가능본을 삽입한 뒤 정량 성과를 확정합니다.",
+      "project_id": "flagshop-rebranding",
+      "capability_id": "strategy-brand",
+      "linked_work_rules": {
+        "keywords": ["리브랜딩", "서비스 소개서", "사업소개서", "서비스 제안서", "브랜드 이미지", "브랜드 영상"],
+        "categories": ["리브랜딩"]
+      }
+    },
+    {
+      "id": "website-renewal",
+      "index": "02",
+      "label": "Digital Experience",
+      "title": "웹사이트 경험 재설계",
+      "period": "2025.01–2026.08",
+      "summary": "복잡한 B2B·공간 서비스를 처음 방문한 고객도 이해할 수 있는 정보 흐름으로 바꿨습니다.",
+      "context": "여러 서비스와 활용 장면을 한 사이트에서 설명해야 해 정보 구조와 전환 경로가 복잡했습니다.",
+      "intent": "고객이 자신의 공간과 문제에 맞는 플래그샵 활용 방식을 빠르게 찾도록 탐색 구조를 재설계했습니다.",
+      "goal": "GNB·LNB부터 페이지 카피와 이미지 방향, 문의 흐름까지 하나의 디지털 경험으로 정렬하는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "구조 진단", "description": "서비스·공간·고객 질문을 기준으로 IA와 핵심 콘텐츠를 다시 분류했습니다." },
+        { "step": "02", "title": "화면 구체화", "description": "메인·서브 페이지, 카피, 전환 경로와 이미지 요구사항을 Figma에 정리했습니다." },
+        { "step": "03", "title": "검토 운영", "description": "주간 리뷰와 스프린트 점검, 리더 보고를 통해 수정 이력을 관리했습니다." }
+      ],
+      "outcomes": [
+        "GNB·LNB 중심의 웹 정보 구조 수립",
+        "페이지별 메시지·카피·이미지 역할 정의",
+        "피드백과 의사결정을 추적할 협업 흐름 구축"
+      ],
+      "evidence_note": "기존·개선 IA와 주요 페이지 전후 화면, 공개 URL을 근거로 추가할 예정입니다.",
+      "project_id": "website-renewal",
+      "capability_id": "digital-seo",
+      "linked_work_rules": {
+        "keywords": ["웹사이트", "WEB", "홈페이지", "UI&UX", "앱스토어", "B2B몰", "고객 경험"],
+        "categories": []
+      }
+    },
+    {
+      "id": "technical-seo-and-search-visibility",
+      "index": "03",
+      "label": "Search Visibility",
+      "title": "검색 노출 기반 고도화",
+      "period": "2024.10–2026.07",
+      "summary": "콘텐츠 작성뿐 아니라 검색 엔진이 읽는 구조와 색인 문제까지 직접 개선했습니다.",
+      "context": "사이트 개편만으로는 검색 노출이 보장되지 않아 메타데이터·색인·내부 링크를 별도로 관리해야 했습니다.",
+      "intent": "플래그샵의 서비스 페이지와 콘텐츠가 검색 엔진에 정확히 수집되고 핵심 검색 수요와 연결되도록 했습니다.",
+      "goal": "기술 SEO 점검을 일회성 수정이 아니라 오류 발견·개선·재확인의 반복 운영 체계로 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "오류 발견", "description": "크롤링·색인·canonical·메타데이터와 검색 플랫폼 상태를 점검했습니다." },
+        { "step": "02", "title": "구조 개선", "description": "sitemap·robots·내부 링크·H1·OG와 페이지별 SEO 태그를 정비했습니다." },
+        { "step": "03", "title": "노출 확인", "description": "Search Console·서치어드바이저와 실제 검색 결과를 다시 확인했습니다." }
+      ],
+      "outcomes": [
+        "기술 SEO 개선안 1–5차 운영",
+        "색인·메타데이터·내부 링크의 관리 기준 구축",
+        "검색 오류 원인과 조치 이력을 반복 확인할 체계 마련"
+      ],
+      "evidence_note": "검색 순위 관찰 기록은 키워드·기간·도구 원본을 재확인하기 전 정량 성과로 표시하지 않습니다.",
+      "project_id": "technical-seo-and-search-visibility",
+      "capability_id": "digital-seo",
+      "linked_work_rules": {
+        "keywords": ["SEO", "검색어 분석", "나무위키", "서치어드바이저", "웹크롤링", "검색 노출", "혁신의숲", "네이버 지도"],
+        "categories": ["SEO"]
+      }
+    },
+    {
+      "id": "performance-and-measurement",
+      "index": "04",
+      "label": "Performance & Data",
+      "title": "광고·측정 운영 루프",
+      "period": "2024.10–2026.08",
+      "summary": "광고 계정·키워드·소재와 GA4/GTM·대시보드를 다음 실행 판단으로 연결했습니다.",
+      "context": "채널별 계정과 데이터가 분리돼 있어 광고 문제의 원인과 다음 조치를 같은 기준으로 판단하기 어려웠습니다.",
+      "intent": "검색 수요, 광고 소재, 랜딩과 전환 신호를 하나의 운영 흐름에서 반복 점검했습니다.",
+      "goal": "집행 자체가 아니라 키워드·소재·측정 오류를 발견하고 빠르게 다음 액션으로 전환하는 루프를 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "계정 정비", "description": "네이버·Google·Meta의 계정·결제·대행사와 캠페인 구조를 정리했습니다." },
+        { "step": "02", "title": "획득 개선", "description": "키워드·광고 카피·소재·예산과 리브랜딩 반영 상태를 반복 조정했습니다." },
+        { "step": "03", "title": "측정 연결", "description": "GA4·GTM·UTM과 Looker Studio를 통해 성과 신호를 한 화면으로 모았습니다." }
+      ],
+      "outcomes": [
+        "검색광고 계정·키워드·소재 운영 구조 재정비",
+        "GA4·GTM·UTM 측정 기반 구축",
+        "지표 변화에서 다음 실행을 도출하는 대시보드 흐름 구현"
+      ],
+      "evidence_note": "공개 화면의 Performance AI는 업무 방식을 보여주는 가데이터이며 실제 광고 계정과 연결되지 않습니다.",
+      "project_id": "search-advertising",
+      "capability_id": "performance-data",
+      "linked_work_rules": {
+        "keywords": ["검색 광고", "구글 ADS", "GFA", "리타게팅", "배너 광고", "온라인 광고", "광고 대행사", "신규 광고 매체", "GA4", "GTM", "UTM", "Looker Studio", "메타 비즈"],
+        "categories": ["퍼포먼스 마케팅"]
+      }
+    },
+    {
+      "id": "always-on-pr-program",
+      "index": "05",
+      "label": "PR & Media",
+      "title": "Always-on PR 프로그램",
+      "period": "2024.10–2026.08",
+      "summary": "뉴스 가치 발굴부터 원고·미디어 관계·배포·결과 검토까지 상시 운영했습니다.",
+      "context": "서비스 변화와 고객 사례가 꾸준히 생겨도 이를 시장이 이해할 의제로 전환하는 반복 구조가 없었습니다.",
+      "intent": "브랜드·사업·고객 사례를 월별 PR 아젠다로 만들고 적합한 미디어 접점에 연결했습니다.",
+      "goal": "단발 보도자료가 아니라 주제 발굴과 관계 관리, 인터뷰와 커버리지를 축적하는 운영 프로그램을 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "의제 발굴", "description": "월별 주제와 롱리스트를 만들고 뉴스 가치와 공개 시점을 검토했습니다." },
+        { "step": "02", "title": "관계·원고", "description": "기자 미팅, 인터뷰 준비, 보도자료 기획·작성·검토를 직접 운영했습니다." },
+        { "step": "03", "title": "배포·축적", "description": "배포 세팅과 기사 결과를 확인하고 다음 아젠다와 회사 채널에 반영했습니다." }
+      ],
+      "outcomes": [
+        "월별 PR 주제와 롱리스트 운영 방식 구축",
+        "브랜드·서비스·고객 사례를 다양한 기사 포맷으로 확장",
+        "미디어 관계와 배포 결과를 다음 기획에 재사용할 기록 축적"
+      ],
+      "evidence_note": "공개 기사 URL과 원고 전후, 배포 결과 리포트를 삽입한 뒤 커버리지 성과를 확정합니다.",
+      "project_id": "always-on-pr-program",
+      "capability_id": "pr-media",
+      "linked_work_rules": {
+        "keywords": ["PR", "보도자료", "기자", "인터뷰", "취재", "언론", "미디어", "기사", "뉴스럴"],
+        "categories": ["PR"]
+      }
+    },
+    {
+      "id": "offline-lead-pipeline",
+      "index": "06",
+      "label": "Offline & Lead",
+      "title": "B2B 행사 리드 파이프라인",
+      "period": "2025.01–2026.08",
+      "summary": "부스와 이벤트를 현장 경험에서 끝내지 않고 리드 정리와 세일즈 이관까지 연결했습니다.",
+      "context": "행사는 노출과 방문자 수만으로 끝나기 쉬워, 사전 준비부터 후속 영업까지 하나의 목표로 묶어야 했습니다.",
+      "intent": "방문자가 플래그샵을 경험하고 정보를 남기며, 행사 이후 세일즈가 바로 후속 접촉할 수 있게 설계했습니다.",
+      "goal": "참가 전략·공간·제작물·운영·DB를 하나의 B2B 리드 획득 프로젝트로 완결하는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "사전 설계", "description": "참가 목적·예산·부스 위치·조닝·이벤트와 리드 수집 방식을 정했습니다." },
+        { "step": "02", "title": "현장 구현", "description": "부스 디자인·홍보물·상품·설치와 현장 운영 커뮤니케이션을 관리했습니다." },
+        { "step": "03", "title": "후속 전환", "description": "수집 DB를 정리·분류해 세일즈가 활용할 수 있는 형태로 이관했습니다." }
+      ],
+      "outcomes": [
+        "행사 준비부터 현장 운영까지 통합 체크포인트 구축",
+        "브랜드 경험과 리드 수집 목적을 같은 부스 흐름으로 연결",
+        "행사 DB를 후속 영업에 전달하는 Handoff 단계 포함"
+      ],
+      "evidence_note": "현장 사진·부스 도면·비식별 리드 구조와 후속 세일즈 데이터를 공개 범위에 맞춰 삽입합니다.",
+      "project_id": "people-and-culture-expo-2026",
+      "capability_id": "offline-field",
+      "linked_work_rules": {
+        "keywords": ["Next Rise", "넥스트라이즈", "하이파이브", "People Analytics", "People & Culture", "페스타", "부스", "스폰서", "컨퍼런스", "행사"],
+        "categories": ["오프라인 마케팅"],
+        "exclude_keywords": ["대행사"]
+      }
+    },
+    {
+      "id": "content-crm-engine",
+      "index": "07",
+      "label": "Content & CRM",
+      "title": "온드미디어·CRM 콘텐츠 엔진",
+      "period": "2024.10–2026.08",
+      "summary": "블로그·SNS·뉴스레터·EDM을 채널별 제작물이 아니라 고객 여정의 재사용 자산으로 운영했습니다.",
+      "context": "콘텐츠 채널마다 요청과 발행이 분리되면 주제와 전환 목적이 축적되지 않고 일회성 제작으로 끝납니다.",
+      "intent": "검색 유입, 브랜드 이해, 구독과 B2B 재접점이라는 채널 역할을 구분해 콘텐츠를 운영했습니다.",
+      "goal": "하나의 사업 주제를 블로그·SNS·뉴스레터·EDM과 서비스 카피로 확장할 수 있는 운영 엔진을 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "역할 정의", "description": "채널별 독자·검색 의도·다음 행동을 구분해 운영 전략을 세웠습니다." },
+        { "step": "02", "title": "콘텐츠 제작", "description": "인터뷰·아티클·SNS·뉴스레터·서비스 카피를 목적에 맞게 제작했습니다." },
+        { "step": "03", "title": "재접점 운영", "description": "발행 콘텐츠를 EDM과 세일즈 메시지로 확장하고 다음 주제에 재사용했습니다." }
+      ],
+      "outcomes": [
+        "블로그·Instagram·뉴스레터·EDM의 역할 구분",
+        "사업 이슈를 여러 채널로 확장하는 콘텐츠 구조 마련",
+        "검색·구독·세일즈 재접점을 연결하는 운영 기반 구축"
+      ],
+      "evidence_note": "채널별 대표 콘텐츠와 발행 리포트는 실제 공개 가능한 화면으로 교체할 예정입니다.",
+      "project_id": null,
+      "capability_id": "content-crm",
+      "linked_work_rules": {
+        "keywords": ["인스타그램", "뉴스레터", "EDM", "블로그", "콘텐츠", "카피라이팅"],
+        "categories": ["SNS", "온드미디어 채널"]
+      }
+    },
+    {
+      "id": "sales-enablement",
+      "index": "08",
+      "label": "Growth & Sales",
+      "title": "B2B 세일즈 지원 체계",
+      "period": "2024.10–2026.08",
+      "summary": "리드 DB·콜드메일·세일즈 콘텐츠·파트너십을 실제 후속 영업이 가능한 정보로 연결했습니다.",
+      "context": "리드가 수집돼도 분류 기준과 적절한 콘텐츠가 없으면 세일즈의 후속 접촉으로 이어지기 어렵습니다.",
+      "intent": "리드의 출처와 관심 맥락을 정리하고 세일즈가 바로 활용할 메시지와 자료를 함께 제공했습니다.",
+      "goal": "리드 수집을 결과로 보지 않고 DB 정리·콘텐츠·메일·파트너십까지 이어지는 Handoff 체계를 만드는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "리드 구조화", "description": "행사·리서치·제휴에서 확보한 DB를 출처와 목적에 맞게 정리했습니다." },
+        { "step": "02", "title": "접촉 설계", "description": "대상별 콜드메일과 뉴스레터, 소개서·카탈로그 등 세일즈 콘텐츠를 만들었습니다." },
+        { "step": "03", "title": "Handoff", "description": "세일즈 조직과 활용 자료·상태를 공유하고 후속 접촉에 필요한 정보를 이관했습니다." }
+      ],
+      "outcomes": [
+        "리드 출처와 활용 목적을 구분하는 DB 정리",
+        "대상별 콜드메일·소개서·카탈로그 제작",
+        "파트너십과 세일즈 후속 접촉을 위한 전달 흐름 구축"
+      ],
+      "evidence_note": "개인·기업 식별 정보를 제거한 DB 구조와 공개 가능한 세일즈 콘텐츠만 근거로 사용합니다.",
+      "project_id": null,
+      "capability_id": "growth-sales",
+      "linked_work_rules": {
+        "keywords": ["콜드 메일", "콜드메일", "세일즈", "DB 리드", "DB 정리", "DB 마케팅", "제휴", "MOU", "파트너십", "리멤버", "카탈로그"],
+        "categories": ["세일즈", "제휴"]
+      }
+    },
+    {
+      "id": "marketing-operations",
+      "index": "09",
+      "label": "Marketing Operations",
+      "title": "마케팅 운영 기반 표준화",
+      "period": "2024.10–2026.08",
+      "summary": "목표·예산·보고·외부 협업과 반복 업무를 기록 가능한 운영 체계로 정리했습니다.",
+      "context": "전략과 캠페인이 늘어날수록 예산·일정·외부 파트너·보고 기준이 분리되면 실행 속도와 판단 근거가 약해집니다.",
+      "intent": "마케팅 목표와 실행 현황, 비용과 협업 이력을 한 흐름에서 확인할 수 있도록 반복 업무의 기준을 만들었습니다.",
+      "goal": "담당자의 기억에 의존하지 않고 다음 기획과 협업에 재사용할 수 있는 운영 기록을 남기는 것이 목표였습니다.",
+      "process": [
+        { "step": "01", "title": "기준 수립", "description": "연간 전략·OKR·예산과 우선순위를 문서화했습니다." },
+        { "step": "02", "title": "실행 관리", "description": "정산·계약·발주·외부 파트너와 반복 운영 항목을 일정에 맞춰 관리했습니다." },
+        { "step": "03", "title": "기록·개선", "description": "주간 보고와 업무 아카이브로 진행 상태와 다음 의사결정 근거를 남겼습니다." }
+      ],
+      "outcomes": [
+        "연간 목표·OKR·예산의 실행 기준 정리",
+        "정산·계약·외부 협업의 반복 체크포인트 구축",
+        "253개 원본 업무를 재사용 가능한 아카이브로 표준화"
+      ],
+      "evidence_note": "내부 금액·계약 정보는 제외하고 공개 가능한 템플릿과 운영 구조만 근거로 사용합니다.",
+      "project_id": null,
+      "capability_id": "marketing-operations",
+      "linked_work_rules": {
+        "keywords": ["마케팅 전략", "마케팅 목표", "OKR", "위클리 보고", "정산", "선입금", "계약", "발주", "업무 지원", "도메인 인증", "대행사", "MRO", "정보 최신화"],
+        "categories": ["기타", "대행사"]
+      }
+    }
+  ]
+}

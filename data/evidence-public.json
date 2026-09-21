@@ -1,0 +1,21 @@
+{
+  "profilePhoto": null,
+  "contact": { "email": null, "resume": null, "profile": null },
+  "seo": [
+    { "id": "brand", "label": "브랜드를 찾는 검색", "query": "플래그샵", "intent": "서비스명으로 검색한 고객에게 일관된 브랜드 정보를 전달합니다.", "actions": ["브랜드 표현 정렬", "메타데이터·OG 정비", "색인 상태 점검"], "screenshot": null, "capturedAt": null, "url": null },
+    { "id": "intent", "label": "고객의 문제에서 시작", "query": "사내 간식", "intent": "고객의 문제와 서비스 활용 장면을 콘텐츠에 연결하는 검색 주제 예시입니다.", "actions": ["검색 의도 분류", "페이지 제목·H1 정렬", "콘텐츠와 서비스 내부 링크 연결"], "screenshot": null, "capturedAt": null, "url": null },
+    { "id": "technical", "label": "검색 엔진이 읽는 구조", "query": "테크니컬 SEO", "intent": "콘텐츠 작성뿐 아니라 수집·색인·대표 URL까지 개선한 실무를 보여줍니다.", "actions": ["canonical·sitemap·robots 점검", "웹 크롤링 오류 수정", "Search Console·서치어드바이저 확인"], "screenshot": null, "capturedAt": null, "url": null }
+  ],
+  "articles": [],
+  "albums": [
+    { "id": "expo", "title": "People & Culture EXPO 2026", "goal": "현장의 브랜드 경험을 B2B 리드 확보와 후속 영업으로 연결", "role": "참가 전략, 부스·제작물, 현장 운영, 리드 정리", "photos": [] },
+    { "id": "nextrise", "title": "NextRise", "goal": "서비스를 직접 경험하는 비즈니스 접점 설계", "role": "세부 역할과 현장 자료 업데이트 예정", "photos": [] },
+    { "id": "highfive", "title": "Wanted Highfive", "goal": "잠재 고객과의 현장 대화에서 후속 접점 만들기", "role": "세부 역할과 현장 자료 업데이트 예정", "photos": [] }
+  ],
+  "content": [
+    { "id": "newsletter", "type": "Newsletter", "title": "읽을 이유가 있는 뉴스레터", "summary": "주제 선정부터 제목·본문·후속 행동까지 하나의 읽기 흐름으로 설계합니다.", "steps": ["독자와 발송 목적 정의", "주제·제목·CTA 구성", "열람·클릭 결과로 다음 발송 개선"], "image": null, "url": null },
+    { "id": "blog", "type": "Blog · SEO", "title": "고객의 질문을 콘텐츠로", "summary": "검색 의도에 맞는 정보를 정리하고 서비스 이해로 이어지는 내부 링크를 설계합니다.", "steps": ["검색 의도와 질문 수집", "정보 구조와 카피 작성", "검색 노출과 유입 점검"], "image": null, "url": null },
+    { "id": "edm", "type": "EDM · B2B", "title": "리드 이후의 다음 대화", "summary": "획득한 리드가 다음 행동을 판단할 수 있도록 제안 메시지와 세일즈 콘텐츠를 연결합니다.", "steps": ["대상과 관심 단계 구분", "제안 메시지·콘텐츠 제작", "세일즈 이관과 후속 접촉"], "image": null, "url": null },
+    { "id": "social", "type": "Instagram", "title": "브랜드를 만나는 짧은 접점", "summary": "채널의 읽기 방식에 맞춰 브랜드 메시지를 이미지와 짧은 카피로 번역합니다.", "steps": ["채널별 역할 정의", "콘텐츠 기획·카피", "반응 확인과 후속 주제 선정"], "image": null, "url": null }
+  ]
+}

@@ -24,22 +24,25 @@
     <link rel="preload" href="assets/desktop-wallpaper.jpg" as="image" />
     <link rel="stylesheet" href="vendor/xp.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="programs.css" />
   </head>
   <body>
     <a class="skip-link" href="#mainContent">포트폴리오 본문으로 이동</a>
 
     <section id="bootScreen" class="system-screen boot-screen is-active" aria-labelledby="bootTitle">
       <div class="boot-panel">
+        <div class="boot-profile" aria-label="이휘재 프로필"><span>HJ</span><strong>이휘재</strong><small>Brand · Content · Growth</small></div>
         <div class="boot-wordmark" aria-hidden="true">
           <span>HWIJAE</span><b>xp</b>
         </div>
         <h1 id="bootTitle" class="sr-only">이휘재 마케팅 포트폴리오 시작</h1>
-        <p>Strategy to Execution · Marketing to Business</p>
-        <button id="bootButton" class="boot-action" type="button">포트폴리오 부팅하기</button>
+        <p class="boot-subtitle">마케팅의 다음 버전을 불러오는 중</p>
         <div id="bootProgress" class="boot-progress" aria-hidden="true">
           <span></span><span></span><span></span>
         </div>
-        <small>Click to start · Enter</small>
+        <p class="boot-intent">윈도우를 켜던 호기심으로, 이제 AI와 마케팅을 만듭니다.<br>프로그램을 하나씩 열면, 전략부터 실행까지의 경험이 보입니다.</p>
+        <button id="bootButton" class="boot-action" type="button">바로 시작 →</button>
+        <button type="button" class="sound-toggle" data-sound aria-pressed="false">소리 끔</button>
       </div>
     </section>
 
@@ -57,13 +60,13 @@
           <span class="login-avatar" aria-hidden="true">HJ</span>
           <span>
             <strong>이휘재</strong>
-            <small>Marketing Portfolio</small>
+            <small>브랜드 · 콘텐츠 · 그로스 마케터</small>
           </span>
         </button>
       </div>
       <div class="login-band login-band-bottom">
         <p>2019–2026 · Marketing Career Archive</p>
-        <p>8개 역량 폴더와 플래그샵 중심의 경력 사례를 탐색할 수 있습니다.</p>
+        <p>AI와 함께 기획·구현한 포트폴리오입니다. 프로필을 누르면 대표 경험부터 안내합니다.</p>
       </div>
     </section>
 
@@ -83,7 +86,7 @@
         </button>
         <button class="desktop-icon" type="button" data-open="archive">
           <img src="assets/document.png" alt="" />
-          <span>WORK ARCHIVE</span>
+          <span>EXPERIENCE ARCHIVE</span>
         </button>
         <button class="desktop-icon" type="button" data-open="contact">
           <img src="assets/mail.png" alt="" />
@@ -102,22 +105,17 @@
         </div>
 
         <div class="window-body portfolio-window-body">
-          <nav class="classic-menu" aria-label="창 메뉴">
-            <button type="button">파일</button>
-            <button type="button">편집</button>
-            <button type="button">보기</button>
-            <button type="button">즐겨찾기</button>
-          </nav>
+          <div class="classic-menu" aria-hidden="true"><span>파일</span><span>보기</span><span>도움말</span></div>
 
           <div class="explorer-toolbar" aria-label="탐색 도구">
-            <button id="backButton" class="toolbar-button" type="button" disabled>
+            <button id="backButton" class="toolbar-button" type="button" aria-label="이전 화면" disabled>
               <span class="toolbar-symbol">←</span><span>뒤로</span>
             </button>
-            <button class="toolbar-button" type="button" data-view="home">
+            <button class="toolbar-button" type="button" data-view="home" aria-label="내 소개">
               <span class="toolbar-symbol">⌂</span><span>홈</span>
             </button>
-            <button class="toolbar-button" type="button" data-view="archive">
-              <span class="toolbar-symbol">★</span><span>업무 아카이브</span>
+            <button class="toolbar-button" type="button" data-view="contact" aria-label="경력·연락">
+              <span class="toolbar-symbol">✉</span><span>경력·연락</span>
             </button>
             <div class="address-bar">
               <span>주소</span>
@@ -140,7 +138,7 @@
                   <img src="assets/about.png" alt="" />Career Timeline
                 </button>
                 <button class="sidebar-link" type="button" data-view="archive">
-                  <img src="assets/document.png" alt="" />Work Archive
+                  <img src="assets/document.png" alt="" />Experience Archive
                 </button>
                 <button class="sidebar-link" type="button" data-view="dashboard">
                   <img src="assets/dashboard.svg" alt="" />AI 성과 대시보드
@@ -150,7 +148,7 @@
                 <p>기록 범위</p>
                 <strong>2019.05—2026.08 기록</strong>
                 <span>5개 경력 구간 · 8개 역량 폴더</span>
-                <span>253개 레거시 업무 인덱스</span>
+                <span>253개 실행 기록 → 9개 업무 경험</span>
               </div>
             </aside>
 
@@ -179,12 +177,12 @@
             <button type="button" data-open="home"><img src="assets/folder.png" alt="" /><span><strong>내 포트폴리오</strong><small>8개 역량 폴더</small></span></button>
             <button type="button" data-open="career"><img src="assets/about.png" alt="" /><span><strong>Career Timeline</strong><small>2019–2026 경력과 강점</small></span></button>
             <button type="button" data-open="dashboard"><img src="assets/dashboard.svg" alt="" /><span><strong>Performance AI</strong><small>가데이터 성과 분석 데모</small></span></button>
-            <button type="button" data-open="archive"><img src="assets/document.png" alt="" /><span><strong>Work Archive</strong><small>2024–2025 업무 인덱스</small></span></button>
+            <button type="button" data-open="archive"><img src="assets/document.png" alt="" /><span><strong>Experience Archive</strong><small>의도·실행·결과로 재구성</small></span></button>
           </div>
           <div class="start-menu-side">
             <button type="button" data-open="contact">연락처</button>
-            <button type="button" data-view="home">역량 폴더</button>
-            <button type="button" data-view="archive">전체 업무 기록</button>
+            <button type="button" data-open="home">내 소개</button>
+            <button type="button" data-open="career">전체 경력</button>
           </div>
         </div>
         <div class="start-menu-footer">
@@ -195,7 +193,7 @@
       <div id="welcomeToast" class="welcome-toast" role="status">
         <button id="toastClose" type="button" aria-label="안내 닫기">×</button>
         <strong>HWIJAE XP에 오신 것을 환영합니다.</strong>
-        <p>8개 역량 폴더를 열면 플래그샵 시스템과 이전 경력의 증거를 함께 확인할 수 있습니다.</p>
+        <p>대표 경험부터 읽거나, 관심 있는 프로그램을 열어보세요.</p>
       </div>
 
       <footer class="taskbar" aria-label="작업 표시줄">
@@ -210,7 +208,7 @@
           </button>
         </div>
         <div class="system-tray">
-          <span aria-hidden="true">●</span>
+          <button type="button" class="sound-toggle" data-sound aria-pressed="false">소리 끔</button>
           <time id="clock">오후 3:20</time>
         </div>
       </footer>
