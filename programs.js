@@ -194,7 +194,9 @@ export function createPrograms({ elements, state, navigate, updateWindowContext 
     if (!renderers[type]) return false;
     const app = APPS.find((a) => a[0] === type), title = app?.[1] || '경력·연락';
     root.className = `explorer-content program-content program-${type}`;
-    root.innerHTML = `${evidence().loadError ? '<p class="p-note" role="status">추가 자료를 불러오지 못했습니다. 기본 포트폴리오와 데모를 먼저 살펴보세요.</p>' : ''}${renderers[type]()}`;
+    const caseId = { brand: ui.brand === 1 ? 'website-renewal' : 'flagshop-rebranding', seo: 'technical-seo-and-search-visibility', pr: 'always-on-pr-program', gallery: 'people-and-culture-expo-2026', dashboard: 'search-advertising' }[type];
+    const caseProject = projects().find((item) => item.id === caseId);
+    root.innerHTML = `${evidence().loadError ? '<p class="p-note" role="status">추가 자료를 불러오지 못했습니다. 기본 포트폴리오와 데모를 먼저 살펴보세요.</p>' : ''}${renderers[type]()}${caseProject ? `<footer class="p-case-bridge"><div><small>${type === 'dashboard' ? '가상 데모와 별개의 실제 업무 기록' : '관련 업무 경험'}</small><strong>${e(caseProject.title)}</strong></div><button type="button" data-project="${caseId}">문제·역할·결과 보기 →</button></footer>` : ''}`;
     updateWindowContext(`${title} — HWIJAE XP`, `C:\\Portfolio\\${title}`, ['dashboard', 'ops'].includes(type) ? '가상 데이터 · 실제 계정과 연결되지 않은 데모' : '이휘재 · Marketing Portfolio');
     elements.portfolioTask.querySelector('span').textContent = title;
     return true;

@@ -515,74 +515,92 @@ function renderCapability(capabilityId) {
   updateWindowContext(capability.label, `C:\\Portfolio\\Capability Map\\${capability.id}.folder`, `${capability.system_files.length}개 시스템 파일 · ${capability.previous_proof.length}개 이전 경력 증거`);
 }
 
-function renderProject(projectId) {
+let caseStoriesRequest;
+
+function loadCaseStories() {
+  caseStoriesRequest ||= fetch('data/work-archive-public.json', { signal: AbortSignal.timeout(5000) })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Case stories: HTTP ${response.status}`);
+      return response.json();
+    })
+    .then((data) => Array.isArray(data.experiences) ? data.experiences : [])
+    .catch(() => []);
+  return caseStoriesRequest;
+}
+
+async function renderProject(projectId) {
   const project = getProject(projectId);
   if (!project) {
     renderDataError(new Error("프로젝트를 찾지 못했습니다."));
     return;
   }
 
+  elements.mainContent.innerHTML = '<p class="case-loading" role="status">사례를 불러오는 중입니다…</p>';
+  const stories = await loadCaseStories();
+  // A slow response must not replace a program opened in the meantime.
+  if (state.route.type !== 'project' || state.route.id !== projectId) return;
+  const story = stories.find((item) => item.project_id === projectId);
   const categories = project.category_ids.map(categoryLabel).filter(Boolean).join(" · ");
-  const resultNotes = project.result_evidence || [];
-  const evidenceSlots = (project.needed_to_publish || []).slice(0, 2);
-
-  while (evidenceSlots.length < 2) {
-    evidenceSlots.push("공개 가능한 프로젝트 근거 자료");
-  }
+  const contributions = project.documented_contributions || [];
+  const outputs = project.documented_outputs || [];
+  const sequence = story?.process || contributions.map((description) => ({ description }));
+  const projects = state.dataset.portfolio_projects;
+  const next = projects[projects.findIndex((item) => item.id === projectId) + 1];
+  const program = { strategy_brand: 'brand', digital_experience: 'seo', performance_data: 'dashboard', pr: 'pr', field_marketing: 'gallery' }[project.category_ids[0]];
+  const programLabel = APPS.find((app) => app[0] === program)?.[1];
 
   elements.mainContent.innerHTML = `
     <article class="content-page project-detail">
       <div class="detail-topline">
-        <button class="back-link" type="button" data-back>← 이전 화면</button>
+        ${state.navDepth > 0 ? '<button class="back-link" type="button" data-back>← 이전 화면</button>' : '<button class="back-link" type="button" data-view="home">← 내 소개</button>'}
         <span class="detail-period">${escapeHtml(project.period)} · FLAGSHOP</span>
       </div>
 
       <header>
         <p class="page-kicker">${escapeHtml(categories)}</p>
         <h1 class="page-title">${escapeHtml(project.title)}</h1>
-        <p class="detail-objective">${escapeHtml(project.objective)}</p>
+        <p class="detail-objective">${escapeHtml(project.case_study_angle)}</p>
       </header>
 
-      <div class="detail-grid">
-        <div>
-          <section class="detail-section">
-            <h2>본인 기여와 실행</h2>
-            <ul>${listMarkup(project.documented_contributions)}</ul>
-          </section>
-          <section class="detail-section">
-            <h2>문서화된 산출물</h2>
-            <div class="output-list">
-              ${(project.documented_outputs || []).map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
-            </div>
-          </section>
-          ${resultNotes.length ? `
-            <section class="detail-section">
-              <h2>성과 표현 전 검증 메모</h2>
-              <ul>${listMarkup(resultNotes)}</ul>
-            </section>
-          ` : ""}
-        </div>
-
-        <aside class="detail-aside">
-          <h2>이 사례가 보여주는 것</h2>
-          <p>${escapeHtml(project.case_study_angle)}</p>
-          <h2>공개 전 확보할 근거</h2>
-          <ul class="evidence-list">${listMarkup(project.needed_to_publish)}</ul>
-        </aside>
+      <div class="case-brief">
+        <section><span>01 / 문제와 목표</span><h2>왜 이 일을 했는가</h2>
+          ${story ? `<p>${escapeHtml(story.context)}</p>` : ''}
+          <p>${escapeHtml(project.objective)}</p>
+        </section>
+        <section><span>02 / 나의 역할</span><h2>직접 맡은 범위</h2>
+          <ul>${listMarkup(contributions.slice(0, 3))}</ul>
+        </section>
       </div>
 
-      <section class="media-slots" aria-label="수동 이미지 삽입 영역">
-        ${evidenceSlots.map((slot, index) => `
-          <div class="media-slot">
-            <strong>이미지·문서 삽입 영역 ${index + 1}</strong>
-            <span>${escapeHtml(slot)}</span>
-          </div>
-        `).join("")}
+      <section class="case-execution" aria-labelledby="caseExecutionHeading">
+        <span>03 / 실행 과정</span><h2 id="caseExecutionHeading">목표를 실행으로 옮긴 방법</h2>
+        <ol>${sequence.map((step, index) => `<li><b aria-hidden="true">${String(index + 1).padStart(2, '0')}</b><div>${step.title ? `<h3>${escapeHtml(step.title)}</h3>` : ''}<p>${escapeHtml(step.description)}</p></div></li>`).join('')}</ol>
       </section>
+
+      <section class="case-result" aria-labelledby="caseResultHeading">
+        <span>04 / 결과</span><h2 id="caseResultHeading">무엇을 구축했는가</h2>
+        <ul>${listMarkup(story?.outcomes || outputs)}</ul>
+        <p class="case-evidence-note">위 내용은 업무 기록을 바탕으로 정리한 실행·산출물입니다. 매출·전환율 등 정량 효과는 근거 확인 전까지 성과로 제시하지 않습니다.</p>
+      </section>
+
+      <details class="case-more"><summary>기여 범위와 산출물 자세히 보기</summary>
+        <ul>${listMarkup(contributions)}</ul>
+        <div class="output-list">${outputs.map((item) => `<span>${escapeHtml(item)}</span>`).join('')}</div>
+      </details>
+      <details class="case-more"><summary>성과 근거 · 공개 자료 추가 예정</summary>
+        <p>아래 자료는 공개 가능한 원본 확인 후 추가합니다.</p>
+        <ul>${listMarkup(project.needed_to_publish || [])}</ul>
+      </details>
+
+      <nav class="case-next" aria-label="사례 다음 탐색">
+        ${programLabel ? `<button type="button" data-open="${program}">${escapeHtml(programLabel)} 열기</button>` : '<button type="button" data-view="home">내 소개로 돌아가기</button>'}
+        ${next ? `<button type="button" data-project="${escapeHtml(next.id)}">다음 사례 · ${escapeHtml(next.title)} →</button>` : '<button type="button" data-view="contact">경력·연락 보기 →</button>'}
+      </nav>
     </article>
   `;
 
-  updateWindowContext(project.title, `C:\\Portfolio\\대표 사례\\${project.id}.case`, `${project.documented_outputs.length}개 산출물 · 근거 자료 수동 삽입 예정`);
+  updateWindowContext(project.title, `C:\\Portfolio\\대표 사례\\${project.id}.case`, `업무 기록 기반 사례 · ${outputs.length}개 산출물 · 정량 성과 확인 전`);
+  elements.mainContent.focus({ preventScroll: true });
 }
 
 function renderArchive() {

@@ -1,4 +1,40 @@
 /* The shared XP frame stays consistent; each program owns its reading pattern. */
+.p-case-bridge { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 24px; padding: 18px 20px; border: 1px solid #b6c7df; background: #edf3fc; }
+.p-case-bridge small,.p-case-bridge strong { display: block; }
+.p-case-bridge small { color: #526579; }
+.p-case-bridge button { flex-shrink: 0; }
+.project-detail { font: 14px/1.75 var(--content-font); color: #344357; word-break: keep-all; overflow-wrap: anywhere; }
+.project-detail .detail-objective { margin: 18px 0 28px; font-size: 17px; }
+.case-brief { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #c5d3e5; background: #f5f8fd; }
+.case-brief section { min-width: 0; padding: 22px; }
+.case-brief section + section { border-left: 1px solid #c5d3e5; }
+.case-brief span,.case-execution > span,.case-result > span { color: #526981; font-size: 12px; }
+.project-detail h2 { margin: 4px 0 14px; color: #22477d; font-size: 19px; }
+.case-brief p { margin: 8px 0 0; }
+.project-detail ul { padding-left: 20px; }
+.project-detail li { margin-bottom: 8px; }
+.case-execution { margin-top: 30px; }
+.case-execution ol { list-style: none; padding: 0; margin: 0; }
+.case-execution li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid #dde5ef; }
+.case-execution b { display: grid; place-items: center; flex: 0 0 34px; height: 34px; background: #e5eefb; color: #24518f; border: 1px solid #c3d3eb; font: bold 13px/1 Tahoma,sans-serif; }
+.case-execution h3 { margin: 0 0 5px; font-size: 15px; }
+.case-execution p { margin: 0; }
+.case-result { margin: 28px 0; padding: 22px; border: 1px solid #b6cdb6; border-top: 4px solid #65935d; background: #f5f9f3; }
+.case-evidence-note { margin: 16px 0 0; color: #52624e; font-size: 12px; }
+.case-more { padding: 14px 0; border-top: 1px solid #ccd7e5; }
+.case-more summary { cursor: pointer; color: #254f89; padding: 6px 0; }
+.case-more summary:focus-visible { outline: 2px solid #b45d0b; outline-offset: 3px; }
+.case-next { display: flex; justify-content: space-between; gap: 12px; margin: 28px 0 0; padding-top: 20px; border-top: 1px solid #ccd7e5; }
+.case-next button { min-height: 40px; padding: 8px 12px; white-space: normal; font: 13px/1.6 var(--content-font); cursor: pointer; }
+.case-loading { padding: 28px; }
+@media (max-width: 760px) {
+  .case-brief { grid-template-columns: 1fr; }
+  .case-brief section + section { border-left: 0; border-top: 1px solid #c5d3e5; }
+  .case-brief section,.case-result { padding: 18px; }
+  .p-case-bridge,.case-next { flex-direction: column; align-items: stretch; }
+  .p-case-bridge { margin: 18px; padding: 16px; }
+  .project-detail .detail-topline { gap: 10px; flex-wrap: wrap; }
+}
 .desktop::after { display: none; }
 .system-tray .sound-toggle,.system-tray time { white-space: nowrap; }
 .system-tray { flex-shrink: 0; }
