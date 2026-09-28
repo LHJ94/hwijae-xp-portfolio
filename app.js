@@ -47,11 +47,12 @@ const state = {
   evidence: {},
 };
 
-const programs = createPrograms({ elements, state, navigate, updateWindowContext });
+const programs = createPrograms({ elements, state, navigate, updateWindowContext, careerMarkup });
 let bootTimer;
 
 function routeFromHash() {
   const [type, id] = location.hash.slice(1).split('/');
+  if (type === 'career' || type === 'about') return { type: 'home', id: 'career' };
   const allowed = [...APPS.map((app) => app[0]), 'career', 'contact', 'project', 'capability'];
   return allowed.includes(type) ? { type, ...(id ? { id } : {}) } : { type: 'home' };
 }
@@ -163,13 +164,13 @@ function handleGlobalClick(event) {
   if (event.target.closest('[data-retry]')) { location.reload(); return; }
   const openButton = event.target.closest("[data-open]");
   if (openButton) {
-    openWindow(openButton.dataset.open);
+    openWindow(openButton.dataset.open, openButton.dataset.section);
     return;
   }
 
   const viewButton = event.target.closest("[data-view]");
   if (viewButton) {
-    navigate({ type: viewButton.dataset.view });
+    navigate({ type: viewButton.dataset.view, ...(viewButton.dataset.section ? { id: viewButton.dataset.section } : {}) });
   }
 
   if (!event.target.closest("#startMenu") && !event.target.closest("#startButton")) {
@@ -224,13 +225,13 @@ function switchSystemScreen(from, to) {
   window.setTimeout(() => to.classList.add("is-active"), 280);
 }
 
-function openWindow(routeType = "home") {
+function openWindow(routeType = "home", sectionId) {
   elements.portfolioWindow.inert = false;
   elements.portfolioWindow.classList.remove("is-hidden", "is-minimized");
   elements.portfolioTask.classList.remove("is-hidden");
   elements.portfolioTask.classList.add("is-active");
   closeStartMenu();
-  navigate({ type: routeType });
+  navigate({ type: routeType, ...(sectionId ? { id: sectionId } : {}) });
   programs.sound();
   elements.mainContent.focus({ preventScroll: true });
 }
@@ -298,6 +299,7 @@ function restart() {
 }
 
 function navigate(route, options = {}) {
+  if (route.type === 'career' || route.type === 'about') route = { type: 'home', id: 'career' };
   if (route.type === 'archive') route = { type: 'home' };
   const { replace = false } = options;
   const isSameRoute = route.type === state.route.type && route.id === state.route.id;
@@ -321,7 +323,15 @@ function renderRoute() {
   updateSelectedNavigation();
 
   if (!state.dataset || !state.career) return;
-  if (programs.render(state.route.type)) { elements.mainContent.scrollTop = 0; return; }
+  if (programs.render(state.route.type)) {
+    elements.mainContent.scrollTop = 0;
+    if (state.route.type === 'home' && state.route.id === 'career') {
+      const section = document.getElementById('homeCareer');
+      section.scrollIntoView({ block: 'start' });
+      section.focus({ preventScroll: true });
+    }
+    return;
+  }
   elements.mainContent.className = 'explorer-content';
 
   switch (state.route.type) {
@@ -332,11 +342,6 @@ function renderRoute() {
     case "dashboard":
       renderDashboard();
       updateWindowContext("FLAGSHOP Performance AI — Demo", "C:\\Portfolio\\Performance AI", "가데이터 · AI 분석 워크플로우 데모");
-      break;
-    case "career":
-    case "about":
-      renderCareer();
-      updateWindowContext("Career Timeline", "C:\\Portfolio\\Career Timeline", "5개 경력 구간 · 이전 경력 증거");
       break;
     case "contact":
       renderContact();
@@ -389,7 +394,7 @@ function renderHome() {
       <section aria-labelledby="careerHeading">
         <div class="section-heading">
           <h2 id="careerHeading">Career Timeline</h2>
-          <button class="text-link-button" type="button" data-view="career">전체 경력과 성과 보기 →</button>
+          <button class="text-link-button" type="button" data-view="home" data-section="career">경력 보기 ↓</button>
         </div>
         <div class="career-strip">
           ${timeline.map((item) => `
@@ -594,7 +599,7 @@ async function renderProject(projectId) {
 
       <nav class="case-next" aria-label="사례 다음 탐색">
         ${programLabel ? `<button type="button" data-open="${program}">${escapeHtml(programLabel)} 열기</button>` : '<button type="button" data-view="home">내 소개로 돌아가기</button>'}
-        ${next ? `<button type="button" data-project="${escapeHtml(next.id)}">다음 사례 · ${escapeHtml(next.title)} →</button>` : '<button type="button" data-view="contact">경력·연락 보기 →</button>'}
+        ${next ? `<button type="button" data-project="${escapeHtml(next.id)}">다음 사례 · ${escapeHtml(next.title)} →</button>` : '<button type="button" data-view="contact">연락처 보기 →</button>'}
       </nav>
     </article>
   `;
@@ -899,15 +904,15 @@ function archiveRecordMatchesExperience(record, experience) {
   return keywordMatch || categoryMatch;
 }
 
-function renderCareer() {
+function careerMarkup() {
   const { profile, career_timeline: timeline, previous_experience: experiences, source_note: sourceNote } = state.career;
-  elements.mainContent.innerHTML = `
-    <article class="content-page career-page">
+  return `
+    <section id="homeCareer" class="career-page home-career" tabindex="-1" aria-label="경력과 강점">
       <header class="profile-hero">
         <div class="about-avatar" aria-hidden="true">HJ</div>
         <div>
           <p class="page-kicker">About Hwijae Lee</p>
-          <h1 class="page-title">${escapeHtml(profile.headline)}</h1>
+          <h2 class="page-title">${escapeHtml(profile.headline)}</h2>
           <p class="page-lead">${escapeHtml(profile.summary)}<br /><strong>${escapeHtml(profile.positioning)}</strong></p>
         </div>
       </header>
@@ -950,7 +955,7 @@ function renderCareer() {
         </div>
         <p class="source-note">※ ${escapeHtml(sourceNote)}</p>
       </section>
-    </article>
+    </section>
   `;
 }
 

@@ -134,6 +134,21 @@
 .p-app-grid small { color: #657993; font-size: 10px; margin-top: 3px; }
 .p-home-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 30px; border-top: 1px solid #e0e6ef; padding-top: 18px; }
 .p-home-footer span { font-size: 11px; color: #667a90; }
+.home-career { margin-top: 40px; padding-top: 32px; border-top: 1px solid #cbd7e6; scroll-margin-top: 24px; }
+.home-career > section { margin-top: 30px; }
+.home-career .page-title { font-size: clamp(23px,2.6vw,34px); margin: 8px 0 14px; }
+.home-career .section-heading { margin-bottom: 16px; }
+.home-career .career-entry h3 { margin: 10px 0 6px; }
+.home-career .career-entry p { margin-top: 18px; }
+.home-career .career-company-card h3 { margin: 18px 0 8px; }
+.home-career .strength-grid h3 { margin: 24px 0 9px; }
+.home-career .source-note { margin-top: 16px; }
+@media (max-width: 760px) {
+  .home-career .profile-hero { grid-template-columns: 1fr; gap: 18px; }
+  .home-career .career-timeline,.home-career .career-company-grid,.home-career .strength-grid { grid-template-columns: 1fr; }
+  .home-career .career-entry { min-height: 0; }
+  .home-career .career-company-card > div { flex-wrap: wrap; }
+}
 .p-program-head { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 20px; border-bottom: 1px solid #baa997; background: #ede7de; }
 .p-program-head > span { color: #935c32; font: 11px Tahoma,sans-serif; letter-spacing: .12em; }
 .p-presentation { display: grid; grid-template-columns: 155px minmax(0,1fr); min-height: 620px; background: #b8b8b5; }

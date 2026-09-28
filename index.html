@@ -71,28 +71,7 @@
     </section>
 
     <main id="desktop" class="desktop" aria-label="HWIJAE XP 데스크톱">
-      <nav class="desktop-icons" aria-label="데스크톱 바로가기">
-        <button class="desktop-icon" type="button" data-open="home">
-          <img src="assets/folder.png" alt="" />
-          <span>PORTFOLIO HOME</span>
-        </button>
-        <button class="desktop-icon" type="button" data-open="career">
-          <img src="assets/about.png" alt="" />
-          <span>CAREER TIMELINE</span>
-        </button>
-        <button class="desktop-icon" type="button" data-open="dashboard">
-          <img src="assets/dashboard.svg" alt="" />
-          <span>PERFORMANCE AI</span>
-        </button>
-        <button class="desktop-icon" type="button" data-open="archive">
-          <img src="assets/document.png" alt="" />
-          <span>EXPERIENCE ARCHIVE</span>
-        </button>
-        <button class="desktop-icon" type="button" data-open="contact">
-          <img src="assets/mail.png" alt="" />
-          <span>CONTACT</span>
-        </button>
-      </nav>
+      <nav class="desktop-icons" aria-label="데스크톱 바로가기"></nav>
 
       <section id="portfolioWindow" class="window portfolio-window is-hidden" aria-labelledby="windowTitle">
         <div class="title-bar">
@@ -114,8 +93,8 @@
             <button class="toolbar-button" type="button" data-view="home" aria-label="내 소개">
               <span class="toolbar-symbol">⌂</span><span>홈</span>
             </button>
-            <button class="toolbar-button" type="button" data-view="contact" aria-label="경력·연락">
-              <span class="toolbar-symbol">✉</span><span>경력·연락</span>
+            <button class="toolbar-button" type="button" data-view="contact" aria-label="연락처">
+              <span class="toolbar-symbol">✉</span><span>연락처</span>
             </button>
             <div class="address-bar">
               <span>주소</span>
@@ -134,8 +113,8 @@
                 <button class="sidebar-link is-selected" type="button" data-view="home">
                   <img src="assets/folder.png" alt="" />Capability Map
                 </button>
-                <button class="sidebar-link" type="button" data-view="career">
-                  <img src="assets/about.png" alt="" />Career Timeline
+                <button class="sidebar-link" type="button" data-view="home" data-section="career">
+                  <img src="assets/about.png" alt="" />경력 보기
                 </button>
                 <button class="sidebar-link" type="button" data-view="archive">
                   <img src="assets/document.png" alt="" />Experience Archive
@@ -173,16 +152,10 @@
           <strong>이휘재</strong>
         </div>
         <div class="start-menu-grid">
-          <div class="start-menu-main">
-            <button type="button" data-open="home"><img src="assets/folder.png" alt="" /><span><strong>내 포트폴리오</strong><small>8개 역량 폴더</small></span></button>
-            <button type="button" data-open="career"><img src="assets/about.png" alt="" /><span><strong>Career Timeline</strong><small>2019–2026 경력과 강점</small></span></button>
-            <button type="button" data-open="dashboard"><img src="assets/dashboard.svg" alt="" /><span><strong>Performance AI</strong><small>가데이터 성과 분석 데모</small></span></button>
-            <button type="button" data-open="archive"><img src="assets/document.png" alt="" /><span><strong>Experience Archive</strong><small>의도·실행·결과로 재구성</small></span></button>
-          </div>
+          <div class="start-menu-main"></div>
           <div class="start-menu-side">
             <button type="button" data-open="contact">연락처</button>
             <button type="button" data-open="home">내 소개</button>
-            <button type="button" data-open="career">전체 경력</button>
           </div>
         </div>
         <div class="start-menu-footer">

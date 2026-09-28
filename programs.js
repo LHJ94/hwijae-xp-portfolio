@@ -2,13 +2,13 @@ import { CHANNELS, DEMO_END, MONTHLY_BUDGET, selectRecords, summarize, channelsF
 
 export const APPS = [
   ['home', '내 소개', '30초로 보는 이휘재', 'about.png'],
-  ['brand', '브랜드 스튜디오', '전략을 고객 접점으로', 'brand'],
-  ['dashboard', 'Performance AI', '데이터에서 다음 실행으로', 'dashboard.svg'],
-  ['seo', 'SEO Explorer', '검색에서 발견되는 브랜드', 'seo'],
-  ['pr', 'PR 뉴스룸', '의제부터 미디어까지', 'pr'],
-  ['gallery', '현장 사진첩', '현장 경험을 리드로', 'gallery'],
-  ['content', '콘텐츠 메일함', '읽고, 클릭하고, 다시 만나는', 'mail.png'],
-  ['ops', 'Growth & Ops', '실행 가능한 운영 구조', 'ops'],
+  ['brand', 'PowerPoint', '전략을 고객 접점으로', 'brand'],
+  ['dashboard', '작업 관리자', '데이터에서 다음 실행으로', 'dashboard.svg'],
+  ['seo', 'Internet Explorer', '검색에서 발견되는 브랜드', 'seo'],
+  ['pr', '뉴스', '의제부터 미디어까지', 'pr'],
+  ['gallery', '사진', '현장 경험을 리드로', 'gallery'],
+  ['content', 'Outlook Express', '읽고, 클릭하고, 다시 만나는', 'mail.png'],
+  ['ops', 'Excel', '실행 가능한 운영 구조', 'ops'],
 ];
 
 const e = (v) => String(v ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;');
@@ -23,7 +23,7 @@ const empty = (title, copy) => `<div class="p-empty"><span aria-hidden="true">�
 const steps = (items) => `<ol class="p-steps">${items.map((s, i) => `<li><span>0${i + 1}</span><p>${e(s)}</p></li>`).join('')}</ol>`;
 const button = (action, label, extra = '') => `<button type="button" data-action="${action}" ${extra}>${label}</button>`;
 
-export function createPrograms({ elements, state, navigate, updateWindowContext }) {
+export function createPrograms({ elements, state, navigate, updateWindowContext, careerMarkup }) {
   const root = elements.mainContent;
   const ui = { tab: 'overview', days: 30, channel: 'all', descending: true, metric: 'spend', brand: 0, slide: 0, seo: 0, album: 0, photo: 0, content: 0, sheet: 'leads', leadStatus: 'all', prFilter: 'all', campaign: '', synced: false, tasks: [], muted: true };
   let audioContext;
@@ -105,12 +105,12 @@ export function createPrograms({ elements, state, navigate, updateWindowContext 
   function home() {
     const profile = state.career.profile;
     return `<article class="p-home">
-      <header class="p-intro"><div><span class="p-eyebrow">HWIJAE LEE · MARKETING PORTFOLIO</span><h1>브랜드의 방향을 잡고,<br>비즈니스의 다음을 만듭니다.</h1><p>${e(profile.summary)}</p><div class="p-intro-actions">${appLink('brand', '대표 경험부터 보기')}<button type="button" data-view="career">전체 경력 보기</button></div></div><div class="p-profile-tile">${safe(evidence().profilePhoto) ? `<img src="${safe(evidence().profilePhoto)}" alt="이휘재 프로필" />` : '<div class="p-monogram">HJ<span>xp</span></div>'}<strong>이휘재</strong><span>Brand · Content · Growth</span><small>Strategy to Execution.<br>Marketing to Business.</small></div></header>
+      <header class="p-intro"><div><span class="p-eyebrow">HWIJAE LEE · MARKETING PORTFOLIO</span><h1>브랜드의 방향을 잡고,<br>비즈니스의 다음을 만듭니다.</h1><p>${e(profile.summary)}</p><div class="p-intro-actions"><button type="button" data-view="home" data-section="career">경력 보기 ↓</button><button type="button" data-view="contact">연락처</button></div></div><div class="p-profile-tile">${safe(evidence().profilePhoto) ? `<img src="${safe(evidence().profilePhoto)}" alt="이휘재 프로필" />` : '<div class="p-monogram">HJ<span>xp</span></div>'}<strong>이휘재</strong><span>Brand · Content · Growth</span><small>Strategy to Execution.<br>Marketing to Business.</small></div></header>
       <section class="p-strengths" aria-label="핵심 역량">${profile.strengths.map((s, i) => `<div><small>0${i + 1}</small><h2>${e(s.title)}</h2><p>${e(s.description)}</p></div>`).join('')}</section>
-      <div class="p-section-title"><h2>먼저 살펴볼 경험</h2><span>문제 · 판단 · 실행</span></div>
-      <div class="p-feature-grid">${[['brand', '01', '흩어진 접점을 하나의 브랜드로', '리브랜딩 전략을 웹·세일즈·PR까지 연결한 과정'], ['gallery', '02', '행사를 다음 영업의 시작으로', '부스·제작물·현장 운영에서 리드 정리까지'], ['dashboard', '03', '데이터를 다음 액션으로', '광고 분석과 AI 활용 방식을 보여주는 가상 데모']].map(([id, no, title, copy]) => `<button class="p-feature" type="button" data-open="${id}"><span>${no} / ${id === 'dashboard' ? '업무 방식 데모' : '플래그샵 경험'}</span><h3>${title}</h3><p>${copy}</p><b>열어보기 ↗</b></button>`).join('')}</div>
+
+
       <div class="p-section-title"><h2>관심 있는 역량으로 바로 이동</h2></div><div class="p-app-grid">${APPS.slice(1).map((a) => `<button type="button" data-open="${a[0]}">${icon(a)}<span><strong>${a[1]}</strong><small>${a[2]}</small></span></button>`).join('')}</div>
-      <footer class="p-home-footer"><span>${state.career.career_timeline.map((t) => e(t.company)).join(' → ')}</span><button type="button" data-view="contact">경력·연락</button></footer>
+      ${careerMarkup()}<footer class="p-home-footer"><span>함께 이야기할 다음 기회를 기다립니다.</span><button type="button" data-view="contact">연락처</button></footer>
     </article>`;
   }
 
@@ -118,7 +118,7 @@ export function createPrograms({ elements, state, navigate, updateWindowContext 
     const p = projects().filter((item) => ['flagshop-rebranding', 'website-renewal'].includes(item.id))[ui.brand];
     const headings = ['왜 시작했는가', '어떻게 실행했는가', '무엇을 구축했는가'];
     const bodies = [`<p class="p-slide-lead">${e(p.objective)}</p>`, `<ul class="p-bullet-list">${p.documented_contributions.map((x) => `<li>${e(x)}</li>`).join('')}</ul>`, `<div class="p-output-tags">${p.documented_outputs.map((x) => `<span>${e(x)}</span>`).join('')}</div><p>전략을 여러 고객 접점에서 활용할 수 있는 실행물로 연결했습니다.</p><small class="p-note">정량 성과와 전후 이미지는 확인된 자료로 업데이트합니다.</small>`];
-    return `<div class="p-program-head"><span>BRAND STUDIO</span>${choices([['0', '리브랜딩'], ['1', '웹 리뉴얼']], ui.brand, 'brand')}</div><div class="p-presentation"><nav class="p-slide-rail" aria-label="사례 슬라이드">${headings.map((h, i) => button(`slide:${i}`, `<small>0${i + 1}</small><strong>${h}</strong>`, `aria-pressed="${i === ui.slide}"`)).join('')}</nav><article class="p-slide"><span class="p-eyebrow">FLAGSHOP / ${e(p.period)}</span><h1>${e(p.title)}</h1><div class="p-slide-divider"></div><h2>${headings[ui.slide]}</h2>${bodies[ui.slide]}<footer><span>이휘재 · Strategy & Brand</span><span>0${ui.slide + 1} / 03</span></footer></article></div>`;
+    return `<div class="p-program-head"><span>PowerPoint</span>${choices([['0', '리브랜딩'], ['1', '웹 리뉴얼']], ui.brand, 'brand')}</div><div class="p-presentation"><nav class="p-slide-rail" aria-label="사례 슬라이드">${headings.map((h, i) => button(`slide:${i}`, `<small>0${i + 1}</small><strong>${h}</strong>`, `aria-pressed="${i === ui.slide}"`)).join('')}</nav><article class="p-slide"><span class="p-eyebrow">FLAGSHOP / ${e(p.period)}</span><h1>${e(p.title)}</h1><div class="p-slide-divider"></div><h2>${headings[ui.slide]}</h2>${bodies[ui.slide]}<footer><span>이휘재 · Strategy & Brand</span><span>0${ui.slide + 1} / 03</span></footer></article></div>`;
   }
 
   function chart(rows) {
@@ -142,7 +142,7 @@ export function createPrograms({ elements, state, navigate, updateWindowContext 
     if (ui.tab === 'campaigns') body = `${card('채널별 대표 캠페인', `<p>채널당 1개 캠페인을 둔 단순화된 시나리오입니다. 캠페인을 선택하면 운영 판단을 확인할 수 있습니다.</p><div class="p-campaigns">${channels.map((c) => `<div>${button(`campaign:${c.id}`, `<span>${e(c.name)} / B2B 문의 획득</span><strong>${won(c.spend)}</strong><small>문의 ${n(c.leads)} · 유효 리드 ${n(c.qualified)}</small>`, `aria-expanded="${ui.campaign === c.id}"`)}${ui.campaign === c.id ? `<div class="p-campaign-detail"><strong>목표: 서비스 도입 상담 확보</strong><p>클릭 수보다 유효 리드 비율(${pct(c.qualified / c.leads)})을 먼저 확인합니다. 문의당 비용 ${won(c.cpl)}과 상담 전환을 함께 검토합니다.</p>${button(`inspect:${c.id}`, '채널 지표 확인')}</div>` : ''}</div>`).join('')}</div>`)}`;
     if (ui.tab === 'insights') body = `<div class="p-insights">${card('01 / 기회 발견', `<span class="p-badge">규칙 기반 분석 예시</span><h2>${e(best.name)} 확장 가능성 점검</h2><p>유효 리드 ${n(best.qualified)}건 · 유효 리드당 비용 ${won(best.qualifiedCpl)}. 저비용만으로 증액하지 않고, 영업 피드백과 확보 가능한 수요를 함께 확인합니다.</p>${button(`inspect:${best.id}`, '지표 근거 보기')}`)}${card('02 / 실행 우선순위', `<h2>${e(worst.name)} 소재·랜딩 점검</h2><p>선택한 채널 중 유효 리드당 비용이 ${won(worst.qualifiedCpl)}으로 가장 높습니다. 타깃·메시지·랜딩 일치 여부를 점검할 작업으로 전환합니다.</p>${button(`add-task:${worst.id}`, ui.tasks.some((t) => t.id === worst.id) ? '운영 시트에 등록됨 ✓' : '운영 시트에 작업 등록', ui.tasks.some((t) => t.id === worst.id) ? 'disabled' : '')} ${appLink('ops', '운영 시트 열기')}`)}</div>`;
     if (ui.tab === 'api') body = `${card('데이터 연결 관리', `<p>연결 완료 화면을 재현한 데모입니다. 실제 광고 계정·토큰·API 요청은 사용하지 않습니다.</p><div class="p-connectors">${[...new Set(CHANNELS.map((c) => c.vendor)), 'GA4', 'CRM'].map((vendor) => `<article><span class="p-connection-dot"></span><strong>${e(vendor)}</strong><span>연결됨 · 데모</span><small>${vendor === 'CRM' ? '유효 리드·상담·계약' : vendor === 'GA4' ? '이벤트·유입 경로' : '광고비·노출·클릭·전환'}</small></article>`).join('')}</div><div class="p-sync">${button('sync', '샘플 동기화 시연')}<span role="status">${ui.synced ? '로컬 샘플 검증 완료 · 외부 요청 0건' : '기준 데이터: 2026.08.31 · 실제 연결 아님'}</span></div>`)}`;
-    return `<header class="p-dashboard-title"><div>${badge()}<h1>Performance AI</h1><p>월 ${won(MONTHLY_BUDGET)} 예산 시나리오 · 실제 플래그샵 실적 아님</p></div><div class="p-filters"><label for="pChannel">채널</label><select id="pChannel"><option value="all">전체 채널</option>${CHANNELS.map((c) => `<option value="${c.id}" ${ui.channel === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}</select>${choices([['7', '7일'], ['30', '30일'], ['90', '90일']], ui.days, 'range')}</div></header>${choices([['overview', '종합 현황'], ['channels', '채널 비교'], ['campaigns', '캠페인'], ['insights', 'AI 실행 제안'], ['api', 'API 연결']], ui.tab, 'tab')}<p class="p-period">${rows[0].date} — ${DEMO_END} · 가상 CRM의 채널별 단일 귀속 기준 · 매체별 중복 전환 합산 아님</p>${body}`;
+    return `<header class="p-dashboard-title"><div>${badge()}<h1>작업 관리자</h1><p>월 ${won(MONTHLY_BUDGET)} 예산 시나리오 · 실제 플래그샵 실적 아님</p></div><div class="p-filters"><label for="pChannel">채널</label><select id="pChannel"><option value="all">전체 채널</option>${CHANNELS.map((c) => `<option value="${c.id}" ${ui.channel === c.id ? 'selected' : ''}>${c.name}</option>`).join('')}</select>${choices([['7', '7일'], ['30', '30일'], ['90', '90일']], ui.days, 'range')}</div></header>${choices([['overview', '종합 현황'], ['channels', '채널 비교'], ['campaigns', '캠페인'], ['insights', 'AI 실행 제안'], ['api', 'API 연결']], ui.tab, 'tab')}<p class="p-period">${rows[0].date} — ${DEMO_END} · 가상 CRM의 채널별 단일 귀속 기준 · 매체별 중복 전환 합산 아님</p>${body}`;
   }
 
   function seo() {
@@ -179,20 +179,20 @@ export function createPrograms({ elements, state, navigate, updateWindowContext 
     if (ui.sheet === 'leads') { heads = ['기업', '유입 채널', '진행 단계', '다음 행동']; rows = leads.filter((l) => ui.leadStatus === 'all' || l.status === ui.leadStatus).map((l) => [l.company, l.source, l.status, l.next]); }
     if (ui.sheet === 'plan') { heads = ['캠페인', '목적', '주요 실행', '판단 기준']; rows = [['서비스 검색', '도입 수요 확보', '키워드·랜딩 정렬', '유효 리드당 비용'], ['행사 후속', '현장 리드 전환', 'DB 분류·영업 이관', '후속 상담 전환'], ['뉴스레터', '기존 리드 재접점', '관심별 콘텐츠 발송', '클릭과 상담 요청'], ['브랜드 PR', '서비스 이해 확장', '의제·원고·배포', '메시지 반영 여부']]; }
     if (ui.sheet === 'budget') { heads = ['채널', '월 계획 예산', '최근 30일 집행', '예산 대비 집행률']; rows = totals.map((t) => [t.name, won(CHANNELS.find((c) => c.id === t.id).spend), won(t.spend), pct(t.spend / CHANNELS.find((c) => c.id === t.id).spend)]); }
-    if (ui.sheet === 'tasks') { heads = ['작업', '출처', '상태', '실행']; rows = ui.tasks.map((t) => [t.title, 'Performance AI · 데모', t.done ? '완료' : '검토 대기', { html: button(`task-done:${t.id}`, t.done ? '다시 열기' : '완료 처리') }]); }
+    if (ui.sheet === 'tasks') { heads = ['작업', '출처', '상태', '실행']; rows = ui.tasks.map((t) => [t.title, '작업 관리자 · 데모', t.done ? '완료' : '검토 대기', { html: button(`task-done:${t.id}`, t.done ? '다시 열기' : '완료 처리') }]); }
     const table = `<div class="p-sheet-scroll"><table class="p-sheet"><caption>${ui.sheet === 'leads' ? '16개 가상 기업의 리드 관리 예시. 대시보드 전체 리드와 별도 표본입니다.' : '마케팅 운영 예시 · 실제 고객·예산·프로젝트 정보 아님'}</caption><thead><tr><th></th>${heads.map((h, i) => `<th><small>${String.fromCharCode(65 + i)}</small>${h}</th>`).join('')}</tr></thead><tbody>${rows.map((row, i) => `<tr><th>${i + 1}</th>${row.map((cell) => `<td>${typeof cell === 'object' ? cell.html : e(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-    return `<div class="p-sheet-title"><div>${badge('OPERATIONS DEMO · 가상 데이터')}<h1>Marketing-Operations.xls</h1></div>${ui.sheet === 'leads' ? `<label>진행 단계 <select id="pLeadStatus"><option value="all">전체</option>${['신규 문의', '유효 리드', '상담 진행', '계약 검토'].map((s) => `<option ${ui.leadStatus === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}</div><div class="p-formula"><span>A1</span><b>ƒx</b><output>${ui.sheet === 'budget' ? '집행률 = 집행액 ÷ 계획 예산' : ui.sheet === 'tasks' ? '분석에서 실행으로 · 이번 방문 동안 유지' : '고객 접점을 다음 행동과 담당 단계로 연결'}</output></div>${table}${!rows.length ? empty('등록된 작업이 없습니다', 'Performance AI → AI 실행 제안에서 작업을 등록하면 여기에 표시됩니다.') + appLink('dashboard', 'Performance AI 열기') : ''}<div class="p-sheet-tabs">${choices([['leads', '리드 관리'], ['plan', '캠페인 기획'], ['budget', '예산 관리'], ['tasks', `실행 작업 (${ui.tasks.length})`]], ui.sheet, 'sheet')}</div>`;
+    return `<div class="p-sheet-title"><div>${badge('OPERATIONS DEMO · 가상 데이터')}<h1>Marketing-Operations.xls</h1></div>${ui.sheet === 'leads' ? `<label>진행 단계 <select id="pLeadStatus"><option value="all">전체</option>${['신규 문의', '유효 리드', '상담 진행', '계약 검토'].map((s) => `<option ${ui.leadStatus === s ? 'selected' : ''}>${s}</option>`).join('')}</select></label>` : ''}</div><div class="p-formula"><span>A1</span><b>ƒx</b><output>${ui.sheet === 'budget' ? '집행률 = 집행액 ÷ 계획 예산' : ui.sheet === 'tasks' ? '분석에서 실행으로 · 이번 방문 동안 유지' : '고객 접점을 다음 행동과 담당 단계로 연결'}</output></div>${table}${!rows.length ? empty('등록된 작업이 없습니다', '작업 관리자 → AI 실행 제안에서 작업을 등록하면 여기에 표시됩니다.') + appLink('dashboard', '작업 관리자 열기') : ''}<div class="p-sheet-tabs">${choices([['leads', '리드 관리'], ['plan', '캠페인 기획'], ['budget', '예산 관리'], ['tasks', `실행 작업 (${ui.tasks.length})`]], ui.sheet, 'sheet')}</div>`;
   }
 
   function contact() {
     const c = evidence().contact || {};
-    return `<article class="p-contact"><span class="p-eyebrow">LET'S TALK ABOUT WHAT'S NEXT</span><h1>다음 비즈니스의 문제를<br>함께 풀고 싶습니다.</h1><p>브랜드의 방향부터 콘텐츠, 고객 획득과 운영까지.<br>문제에 필요한 마케팅을 설계하고 실행합니다.</p><div class="p-intro-actions">${c.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) ? `<a class="p-link" href="mailto:${e(c.email)}">${e(c.email)}</a>` : '<span class="p-note">공개 연락처 업데이트 예정</span>'}${external(c.resume, '이력서 보기')}${external(c.profile, '외부 프로필')}</div><hr><button type="button" data-view="career">경력 확인</button> ${button('copy', '현재 포트폴리오 주소 복사')}<p class="p-note">이 포트폴리오는 AI와 함께 기획·구현했습니다. 실제 업무 경험과 업무 방식 데모는 화면에 구분해 표시합니다.</p></article>`;
+    return `<article class="p-contact"><span class="p-eyebrow">LET'S TALK ABOUT WHAT'S NEXT</span><h1>다음 비즈니스의 문제를<br>함께 풀고 싶습니다.</h1><p>브랜드의 방향부터 콘텐츠, 고객 획득과 운영까지.<br>문제에 필요한 마케팅을 설계하고 실행합니다.</p><div class="p-intro-actions">${c.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email) ? `<a class="p-link" href="mailto:${e(c.email)}">${e(c.email)}</a>` : '<span class="p-note">공개 연락처 업데이트 예정</span>'}${external(c.resume, '이력서 보기')}${external(c.profile, '외부 프로필')}</div><hr><button type="button" data-view="home" data-section="career">내 소개 · 경력 보기</button> ${button('copy', '현재 포트폴리오 주소 복사')}<p class="p-note">이 포트폴리오는 AI와 함께 기획·구현했습니다. 실제 업무 경험과 업무 방식 데모는 화면에 구분해 표시합니다.</p></article>`;
   }
 
   function render(type) {
     const renderers = { home, brand, dashboard, seo, pr, gallery, content, ops, contact };
     if (!renderers[type]) return false;
-    const app = APPS.find((a) => a[0] === type), title = app?.[1] || '경력·연락';
+    const app = APPS.find((a) => a[0] === type), title = app?.[1] || '연락처';
     root.className = `explorer-content program-content program-${type}`;
     const caseId = { brand: ui.brand === 1 ? 'website-renewal' : 'flagshop-rebranding', seo: 'technical-seo-and-search-visibility', pr: 'always-on-pr-program', gallery: 'people-and-culture-expo-2026', dashboard: 'search-advertising' }[type];
     const caseProject = projects().find((item) => item.id === caseId);
