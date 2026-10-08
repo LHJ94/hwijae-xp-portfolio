@@ -1,21 +1,25 @@
 {
-  "profilePhoto": null,
+  "profilePhoto": "assets/profile.png",
   "contact": { "email": null, "resume": null, "profile": null },
   "seo": [
-    { "id": "brand", "label": "브랜드를 찾는 검색", "query": "플래그샵", "intent": "서비스명으로 검색한 고객에게 일관된 브랜드 정보를 전달합니다.", "actions": ["브랜드 표현 정렬", "메타데이터·OG 정비", "색인 상태 점검"], "screenshot": null, "capturedAt": null, "url": null },
+    { "id": "brand", "label": "Google · 브랜드 검색 진단", "query": "플래그샵", "intent": "브랜드명으로 검색해도 동명의 다른 업체가 먼저 보였습니다. 보관된 Google 검색 화면에서 확인한 과제로, 현재 순위나 개선 완료 성과를 의미하지 않습니다.", "actions": ["문제: 브랜드 검색에서 다른 업체와 혼재", "목표: 서비스명과 운영 주체를 명확하게 연결", "개선 방향: 브랜드 표현·메타데이터·색인 상태 정비"], "screenshot": "assets/evidence/seo-google-initial.png", "capturedAt": "2025년 4월 보관 자료 · 파일명 04.23, 정확한 촬영일 미확인", "url": null },
+    { "id": "brand-naver", "label": "Naver · 서비스 설명 노출", "query": "플래그샵", "intent": "보관된 Naver 검색 화면에는 workershigh.com의 플래그샵 서비스 설명과 하위 페이지가 노출되어 있습니다. 동명 업체도 함께 보여, 브랜드 구분과 서비스 설명을 함께 점검하는 자료입니다.", "actions": ["확인: 서비스 설명과 하위 페이지 노출", "과제: 동명 업체와 브랜드 구분", "검증 범위: 과거 화면 기록이며 순위 상승·유입 증가는 별도 측정 필요"], "screenshot": "assets/evidence/seo-naver-initial.png", "capturedAt": "2025년 4월 보관 자료 · 파일명 04.23, 정확한 촬영일 미확인", "url": null },
     { "id": "intent", "label": "고객의 문제에서 시작", "query": "사내 간식", "intent": "고객의 문제와 서비스 활용 장면을 콘텐츠에 연결하는 검색 주제 예시입니다.", "actions": ["검색 의도 분류", "페이지 제목·H1 정렬", "콘텐츠와 서비스 내부 링크 연결"], "screenshot": null, "capturedAt": null, "url": null },
     { "id": "technical", "label": "검색 엔진이 읽는 구조", "query": "테크니컬 SEO", "intent": "콘텐츠 작성뿐 아니라 수집·색인·대표 URL까지 개선한 실무를 보여줍니다.", "actions": ["canonical·sitemap·robots 점검", "웹 크롤링 오류 수정", "Search Console·서치어드바이저 확인"], "screenshot": null, "capturedAt": null, "url": null }
   ],
   "articles": [],
   "albums": [
-    { "id": "expo", "title": "People & Culture EXPO 2026", "goal": "현장의 브랜드 경험을 B2B 리드 확보와 후속 영업으로 연결", "role": "참가 전략, 부스·제작물, 현장 운영, 리드 정리", "photos": [] },
+    { "id": "expo", "title": "People & Culture EXPO 2026", "goal": "현장의 브랜드 경험을 B2B 리드 확보와 후속 영업으로 연결", "role": "참가 전략, 부스·제작물, 현장 운영, 리드 정리", "photos": [
+      { "src": "assets/evidence/expo-2026-booth.png", "alt": "People & Culture EXPO 플래그샵 A06·A07 부스 전경", "caption": "서비스 메시지·설비·상품 진열을 한 공간에 구성한 플래그샵 부스 전경" },
+      { "src": "assets/evidence/expo-2026-experience.png", "alt": "플래그샵 오피스 안내 벽면과 간식·MRO 진열, 무인 판매 설비", "caption": "사무실 간식 복지부터 MRO·웰컴박스까지, 설명과 실물을 함께 보여주는 전시 구성" }
+    ] },
     { "id": "nextrise", "title": "NextRise", "goal": "서비스를 직접 경험하는 비즈니스 접점 설계", "role": "세부 역할과 현장 자료 업데이트 예정", "photos": [] },
     { "id": "highfive", "title": "Wanted Highfive", "goal": "잠재 고객과의 현장 대화에서 후속 접점 만들기", "role": "세부 역할과 현장 자료 업데이트 예정", "photos": [] }
   ],
   "content": [
-    { "id": "newsletter", "type": "Newsletter", "title": "읽을 이유가 있는 뉴스레터", "summary": "주제 선정부터 제목·본문·후속 행동까지 하나의 읽기 흐름으로 설계합니다.", "steps": ["독자와 발송 목적 정의", "주제·제목·CTA 구성", "열람·클릭 결과로 다음 발송 개선"], "image": null, "url": null },
+    { "id": "newsletter", "type": "Newsletter · 2026.01", "title": "WORKERS, hi · 1월 뉴스레터", "summary": "정기 뉴스레터 발행본입니다. 직장인 인사이트, 시즌 상품과 블로그 콘텐츠를 묶고 주문 문의·블로그 방문으로 이어지는 버튼을 배치했습니다. 아래 버튼들은 당시 발행 화면의 이미지입니다.", "steps": ["목적: 기존 독자에게 브랜드와 상품의 재접점 제공", "구성: 직장인 인사이트 → 시즌 상품 → 블로그", "산출물: 발행본 확인 · 열람률·클릭률은 검증 자료 확보 후 추가"], "image": "assets/evidence/newsletter-2026-01.png", "url": null },
     { "id": "blog", "type": "Blog · SEO", "title": "고객의 질문을 콘텐츠로", "summary": "검색 의도에 맞는 정보를 정리하고 서비스 이해로 이어지는 내부 링크를 설계합니다.", "steps": ["검색 의도와 질문 수집", "정보 구조와 카피 작성", "검색 노출과 유입 점검"], "image": null, "url": null },
     { "id": "edm", "type": "EDM · B2B", "title": "리드 이후의 다음 대화", "summary": "획득한 리드가 다음 행동을 판단할 수 있도록 제안 메시지와 세일즈 콘텐츠를 연결합니다.", "steps": ["대상과 관심 단계 구분", "제안 메시지·콘텐츠 제작", "세일즈 이관과 후속 접촉"], "image": null, "url": null },
-    { "id": "social", "type": "Instagram", "title": "브랜드를 만나는 짧은 접점", "summary": "채널의 읽기 방식에 맞춰 브랜드 메시지를 이미지와 짧은 카피로 번역합니다.", "steps": ["채널별 역할 정의", "콘텐츠 기획·카피", "반응 확인과 후속 주제 선정"], "image": null, "url": null }
+    { "id": "social", "type": "Instagram · 제작물", "title": "가산스토어 오픈 · 황치즈칩 입고 안내", "summary": "인스타그램 작업 폴더에서 확인한 2026년 3월 제작물입니다. 가산스토어 오픈과 상품 입고 소식을 하나의 이미지로 구성했습니다. 실제 게시 여부·게시일과 반응 지표는 별도 확인이 필요합니다.", "steps": ["목적: 매장 오픈과 상품 입고 소식 전달", "구성: 오픈 메시지 → 상품 비주얼 → 플래그샵 브랜드", "확인 범위: 제작 이미지 · 게시 성과는 미확인"], "image": "assets/evidence/social-cheese-2026-03.png", "url": null }
   ]
 }
